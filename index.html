@@ -156,6 +156,67 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-treer-命令行生成目录结构的实用小工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/23/treer-命令行生成目录结构的实用小工具/">treer:命令行生成目录结构的实用小工具</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/23/treer-命令行生成目录结构的实用小工具/" class="archive-article-date">
+  	<time datetime="2017-04-23T03:12:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有时候在写说明文档的时，需要列出文件的一个目录结构,几次手动拼接之后，写了一个cli小工具来自动生成。</p>
+<h3 id="安装方法："><a href="#安装方法：" class="headerlink" title="安装方法："></a>安装方法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install treer -g</div></pre></td></tr></table></figure>
+<p>如此我们便可以快速的生成目录结构啦！</p>
+<h3 id="生成结果"><a href="#生成结果" class="headerlink" title="生成结果"></a>生成结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ treer</div><div class="line">MacBook-Pro:Desktop Deryck$ treer</div><div class="line"></div><div class="line"></div><div class="line">Desktop</div><div class="line">├─.DS_Store</div><div class="line">├─.localized</div><div class="line">├─dir2</div><div class="line">|  ├─file3</div><div class="line">|  └file4</div><div class="line">├─dir1</div><div class="line">|  ├─dile2</div><div class="line">|  └file1</div></pre></td></tr></table></figure>
+<h4 id="指定目录"><a href="#指定目录" class="headerlink" title="指定目录"></a>指定目录</h4><p>默认的目录为当前的路径，可以通过<code>-d</code> 传入指定的路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ treer -d &lt;指定路径&gt;</div></pre></td></tr></table></figure>
+<h4 id="导出结果"><a href="#导出结果" class="headerlink" title="导出结果"></a>导出结果</h4><p>可将结果导出到文件中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ treer -e &lt;导出路径&gt;</div></pre></td></tr></table></figure>
+<h4 id="忽略指定的目录"><a href="#忽略指定的目录" class="headerlink" title="忽略指定的目录"></a>忽略指定的目录</h4><p>有时候我们需要忽略一些文件名，比如我们的<code>node_modules</code>文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ treer -i &lt;&quot;文件名，支持正则表达式/regex/哦&quot;&gt;</div></pre></td></tr></table></figure>
+<p>如果觉得实用，不妨<a href="https://github.com/derycktse/treer" target="_blank" rel="external">Star</a>一下吧，<a href="https://github.com/derycktse/treer" target="_blank" rel="external">github地址</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/23/treer-命令行生成目录结构的实用小工具/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-三个关于数组的小技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
