@@ -6,23 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://derycktse.github.io">
-  <title>浅谈javascript的原型及原型链 | Deryck</title>
+  <title>实现拖拽 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原型与原型链是javascript里面最最核心的内容，如果不能理解它们之间的存在关系的话，那么我们是不能理解这门语言的。
-在JS中，主要有两种创建对象的方法, 分别是对象字面量以及调用构造函数12345//对象字面量var obj1 = &amp;#123;&amp;#125;//调用构造函数var obj2 = new Object()">
+  <meta name="description" content="今天在写一个拖拽效果，其实实现原理比较简单
+通过mousedown, mousemove, mouseup加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈javascript的原型及原型链">
-<meta property="og:url" content="https://derycktse.github.io/2016/03/08/浅谈javascript的原型及原型链/index.html">
+<meta property="og:title" content="实现拖拽">
+<meta property="og:url" content="https://derycktse.github.io/2017/04/27/实现拖拽/index.html">
 <meta property="og:site_name" content="Deryck">
-<meta property="og:description" content="原型与原型链是javascript里面最最核心的内容，如果不能理解它们之间的存在关系的话，那么我们是不能理解这门语言的。
-在JS中，主要有两种创建对象的方法, 分别是对象字面量以及调用构造函数12345//对象字面量var obj1 = &amp;#123;&amp;#125;//调用构造函数var obj2 = new Object()">
-<meta property="og:image" content="https://i.stack.imgur.com/KFzI3.png">
-<meta property="og:updated_time" content="2017-04-26T16:15:05.000Z">
+<meta property="og:description" content="今天在写一个拖拽效果，其实实现原理比较简单
+通过mousedown, mousemove, mouseup加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。">
+<meta property="og:updated_time" content="2017-04-26T16:28:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈javascript的原型及原型链">
-<meta name="twitter:description" content="原型与原型链是javascript里面最最核心的内容，如果不能理解它们之间的存在关系的话，那么我们是不能理解这门语言的。
-在JS中，主要有两种创建对象的方法, 分别是对象字面量以及调用构造函数12345//对象字面量var obj1 = &amp;#123;&amp;#125;//调用构造函数var obj2 = new Object()">
-<meta name="twitter:image" content="https://i.stack.imgur.com/KFzI3.png">
+<meta name="twitter:title" content="实现拖拽">
+<meta name="twitter:description" content="今天在写一个拖拽效果，其实实现原理比较简单
+通过mousedown, mousemove, mouseup加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -163,54 +161,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-浅谈javascript的原型及原型链" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-实现拖拽" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      浅谈javascript的原型及原型链
+      实现拖拽
     </h1>
   
 
         
-        <a href="/2016/03/08/浅谈javascript的原型及原型链/" class="archive-article-date">
-  	<time datetime="2016-03-08T14:26:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-08</time>
+        <a href="/2017/04/27/实现拖拽/" class="archive-article-date">
+  	<time datetime="2017-04-26T16:17:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>原型与原型链是javascript里面最最核心的内容，如果不能理解它们之间的存在关系的话，那么我们是不能理解这门语言的。</p>
-<p>在JS中，主要有两种创建对象的方法, 分别是对象字面量以及调用构造函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对象字面量</span></div><div class="line"><span class="keyword">var</span> obj1 = &#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//调用构造函数</span></div><div class="line"><span class="keyword">var</span> obj2 = <span class="keyword">new</span> <span class="built_in">Object</span>()</div></pre></td></tr></table></figure></p>
+        <p>今天在写一个拖拽效果，其实实现原理比较简单</p>
+<p>通过<code>mousedown</code>, <code>mousemove</code>, <code>mouseup</code>加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。</p>
 <a id="more"></a>
-<p>其实上述两种创建对象的方法，本质上是一样的，都是JS引擎调用对象的构造函数来新建出一个对象。构造函数本身也是一个普通的JS函数</p>
-<p>下面我们来看一个例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建构造函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name</div><div class="line">&#125;</div><div class="line"><span class="comment">//每个构造函数JS引擎都会自动添加一个prototype属性，我们称之为原型，这是一个对象</span></div><div class="line"><span class="comment">//每个由构造函数创建的对象都会共享prototype上面的属性与方法</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> Person.prototype) <span class="comment">// 'object'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//我们为Person.prototype添加sayName方法</span></div><div class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//创建实例</span></div><div class="line"><span class="keyword">var</span> person1 = <span class="keyword">new</span> Person(<span class="string">'Messi'</span>)</div><div class="line"><span class="keyword">var</span> person2 = <span class="keyword">new</span> Person(<span class="string">'Suarez'</span>)</div><div class="line"></div><div class="line">person1.sayName() <span class="comment">// 'Messi'</span></div><div class="line">person2.sayName() <span class="comment">// 'Suarez'</span></div><div class="line"></div><div class="line">person1.sayName === person2.sayName <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
-<p>我们借助上面的例子来理解构造函数-原型-实例，三者之间的关系，主要有几个基本概念</p>
-<ul>
-<li>构造函数默认会有一个<code>protoype</code>属性指向它的原型</li>
-<li><p>构造函数的原型会有一个<code>consctructor</code>的属性指向构造函数本身, 即</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Person.prototype.constructor === Person</div></pre></td></tr></table></figure>
-</li>
-<li><p>每一个<code>new</code>出来的实例都有一个隐式的<code>__proto__</code>属性，指向它们的构造函数的原型，即</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">person1.__proto__ === Person.prototype</div><div class="line">person1.__proto__.constructor === Person</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>了解了这些基本概念之后，我们再来看看javascript的一些原生构造函数的关系网，看下列的图</p>
-<p><img src="https://i.stack.imgur.com/KFzI3.png" alt="javascript objects treasure map"><br>引自<a href="http://stackoverflow.com/questions/650764/how-does-proto-differ-from-constructor-prototype" target="_blank" rel="external">stackoverflow</a></p>
-<p>按照我们上面的理解, Oject本身是一个构造函数，它也是一个对象，那么<br>    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype</div></pre></td></tr></table></figure></p>
-<p>为了方便我们记住上图，还有几个需要我们知道的特殊概念：</p>
-<ol>
-<li><p><code>Function</code>的原型属性与<code>Function</code>的原型指向同一个对象. 即是</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Function</span>.__proto__ == <span class="built_in">Function</span>.prototype</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>Object.prototype.__proto__ === null</code></p>
-</li>
-<li><code>typeof Function.prototype === &#39;function&#39;</code></li>
-</ol>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[在JavaScript中，Function构造函数本身也算是Function类型的实例吗？][<a href="https://www.zhihu.com/question/31333084/answer/152086175" target="_blank" rel="external">https://www.zhihu.com/question/31333084/answer/152086175</a>]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createDraggable</span>(<span class="params">ele</span>)</span>&#123;</div><div class="line">	<span class="comment">/*mousedown</span></div><div class="line">	mousemove</div><div class="line">	mouseup*/</div><div class="line">	<span class="keyword">var</span> moveFlag = <span class="literal">false</span></div><div class="line">	on(ele,<span class="string">'mousedown'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">		moveFlag = <span class="literal">true</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'touch start'</span>)</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span></div><div class="line">	&#125;)</div><div class="line">	on(ele,<span class="string">'mousemove'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'moving'</span>)</div><div class="line">		<span class="keyword">if</span>(!moveFlag) <span class="keyword">return</span> </div><div class="line">			<span class="keyword">var</span> event = e || <span class="built_in">window</span>.event</div><div class="line">		<span class="keyword">var</span> offsetX = e.clientX - <span class="number">50</span></div><div class="line">		, offsetY = e.clientY - <span class="number">50</span></div><div class="line">		</div><div class="line">		ele.style.left = offsetX + <span class="string">'px'</span>,</div><div class="line">		ele.style.top = offsetY + <span class="string">'px'</span></div><div class="line">	</div><div class="line">	&#125;)</div><div class="line">	on(ele,<span class="string">'mouseup'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		moveFlag = <span class="literal">false</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'touch end'</span>)</div><div class="line">	&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原本我的代码都是绑定在目标dom上，这个时候会发现当鼠标甩动过快的时候，焦点会在目标dom外，导致这个时候行为看起来很卡</p>
+<p>接着修改<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">on(<span class="built_in">window</span>,<span class="string">'mousemove'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'moving'</span>)</div><div class="line">		<span class="keyword">if</span>(!moveFlag) <span class="keyword">return</span> </div><div class="line">			<span class="keyword">var</span> event = e || <span class="built_in">window</span>.event</div><div class="line">		<span class="keyword">var</span> offsetX = e.clientX - <span class="number">50</span></div><div class="line">		, offsetY = e.clientY - <span class="number">50</span></div><div class="line">		</div><div class="line">		ele.style.left = offsetX + <span class="string">'px'</span>,</div><div class="line">		ele.style.top = offsetY + <span class="string">'px'</span></div><div class="line">	</div><div class="line">	&#125;)</div></pre></td></tr></table></figure></p>
+<p>主流浏览器看起来正常了，却发现IE8移动不了！！！</p>
+<p>最终发现应该是<code>mousemove</code>时间并没有冒泡到<code>window</code>对象上, 改为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">on(<span class="built_in">document</span>,<span class="string">'mousemove'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'moving'</span>)</div><div class="line">		<span class="keyword">if</span>(!moveFlag) <span class="keyword">return</span> </div><div class="line">			<span class="keyword">var</span> event = e || <span class="built_in">window</span>.event</div><div class="line">		<span class="keyword">var</span> offsetX = e.clientX - <span class="number">50</span></div><div class="line">		, offsetY = e.clientY - <span class="number">50</span></div><div class="line">		</div><div class="line">		ele.style.left = offsetX + <span class="string">'px'</span>,</div><div class="line">		ele.style.top = offsetY + <span class="string">'px'</span></div><div class="line">	</div><div class="line">	&#125;)</div></pre></td></tr></table></figure></p>
+<p>效果终于看起来OK啦<br>见<a href="/demo/index1.html">demo</a></p>
 
       
 
@@ -240,21 +219,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">prototype</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -305,7 +269,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2016/03/08/浅谈javascript的原型及原型链/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2017/04/27/实现拖拽/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -319,18 +283,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/03/10/webpack入门/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          webpack入门
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/02/23/ES2015读书笔记/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ES2015读书笔记</div>
+    <a href="/2017/04/23/treer-命令行生成目录结构的实用小工具/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">treer:命令行生成目录结构的实用小工具</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -344,7 +299,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="浅谈javascript的原型及原型链" data-title="浅谈javascript的原型及原型链" data-url="https://derycktse.github.io/2016/03/08/浅谈javascript的原型及原型链/"></div>
+	<div class="ds-thread" data-thread-key="实现拖拽" data-title="实现拖拽" data-url="https://derycktse.github.io/2017/04/27/实现拖拽/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
