@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://derycktse.github.io/"/>
-  <updated>2017-04-27T17:09:55.000Z</updated>
+  <updated>2017-04-30T17:36:59.000Z</updated>
   <id>https://derycktse.github.io/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用rollup</title>
+    <link href="https://derycktse.github.io/2017/05/01/%E4%BD%BF%E7%94%A8rollup/"/>
+    <id>https://derycktse.github.io/2017/05/01/使用rollup/</id>
+    <published>2017-04-30T17:32:32.000Z</published>
+    <updated>2017-04-30T17:36:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Rollup被誉为下一代ES</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --global rollup</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="使用watch模式"><a href="#使用watch模式" class="headerlink" title="使用watch模式"></a>使用watch模式</h3><p>安装依赖<code>rollup-watch</code>后，便可以愉快地开发啦<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$npm install --save-dev rollup-watch</div></pre></td></tr></table></figure></p>
+<p>启用模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rollup -w</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Rollup被誉为下一代ES&lt;/p&gt;
+&lt;h3 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ npm install --global rollup&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+    
+      <category term="构建" scheme="https://derycktse.github.io/tags/%E6%9E%84%E5%BB%BA/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Vue全家桶开发知乎日报</title>
