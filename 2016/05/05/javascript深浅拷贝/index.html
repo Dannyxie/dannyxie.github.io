@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://derycktse.github.io">
-  <title>Archives: 2017 | Deryck</title>
+  <title>javascript深浅拷贝 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Deryck">
-<meta property="og:url" content="https://derycktse.github.io/archives/2017/index.html">
+  <meta name="description" content="javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量
+例如下面例子1234var object = &amp;#123; a: 1, b: 2 &amp;#125; ;  var copy = object ;  object.a = 3 ;  console.log( copy.a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript深浅拷贝">
+<meta property="og:url" content="https://derycktse.github.io/2016/05/05/javascript深浅拷贝/index.html">
 <meta property="og:site_name" content="Deryck">
+<meta property="og:description" content="javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量
+例如下面例子1234var object = &amp;#123; a: 1, b: 2 &amp;#125; ;  var copy = object ;  object.a = 3 ;  console.log( copy.a">
+<meta property="og:updated_time" content="2017-05-07T08:53:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Deryck">
+<meta name="twitter:title" content="javascript深浅拷贝">
+<meta name="twitter:description" content="javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量
+例如下面例子1234var object = &amp;#123; a: 1, b: 2 &amp;#125; ;  var copy = object ;  object.a = 3 ;  console.log( copy.a">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -154,167 +161,199 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-javascript深浅拷贝" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      javascript深浅拷贝
+    </h1>
+  
+
+        
+        <a href="/2016/05/05/javascript深浅拷贝/" class="archive-article-date">
+  	<time datetime="2016-05-05T11:47:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-05</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量</p>
+<p>例如下面例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> object = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125; ;  </div><div class="line"><span class="keyword">var</span> copy = object ;  </div><div class="line">object.a = <span class="number">3</span> ;  </div><div class="line"><span class="built_in">console</span>.log( copy.a ) ;</div></pre></td></tr></table></figure></p>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>遍历对象的属性，将属性赋值给新创建的对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowCopy</span>(<span class="params">source</span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> cloneObj = &#123;&#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> source)&#123;</div><div class="line">        cloneObj[key] = source[key]</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cloneObj</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是不是很简单，不过，上面的代码有几个问题:</p>
+<ul>
+<li>克隆出来的对象跟原本的对象原型链是不同的</li>
+<li>原本原型链上的属性，被克隆到了新对象上作为自有属性了</li>
+<li>只有可被枚举(<code>emuerable</code>)的属性被克隆了</li>
+<li>属性的<code>descriptor</code>并没有被克隆，比如原本为只读的访问属性，被克隆成可读写的属性了</li>
+<li>浅拷贝最重要的一个问题，如果属性本身是一个对象，那么克隆的对象以及原本的对象将共享这个属性</li>
+</ul>
+<p>为了完善上面的问题，我们可以使用<code>Object.getOwnPropertyNames()</code>来配合完善, <code>Object.keys</code>只能返回可枚举的属性</p>
+<p>我们来分析上面几个缺陷:</p>
+<p><strong>克隆出来的对象跟原本的对象原型链是不同的</strong></p>
+<p>我们可以通过获取原对象的原型对象(<code>Object.getPrototypeOf</code>)，再将克隆对象继承与该原型对象(<code>Object.create</code>)</p>
+<p><strong>原本原型链上的属性，被克隆到了新对象上作为自有属性了</strong></p>
+<p><strong>只有可被枚举(<code>emuerable</code>)的属性被克隆了</strong></p>
+<p>在复制过程中，我们可以先判断属性是否为自由属性(<code>Object.prototype.hasOwnProperty</code>)，当然，我们可以更简单的使用<code>Object.getOwnPropertyNames</code>，它可返回所有的自有属性（包括不可枚举的）</p>
+<p><strong>属性的<code>descriptor</code>并没有被克隆，比如原本为只读的访问属性，被克隆成可读写的属性了</strong><br><br>通过<code>Object.getOwnPropertyDescriptor</code>获取属性的descriptor之后使用<code>Object.defineProperty</code>定义到克隆对象中</p>
+<p>我们看下面的改良版<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowCopy</span>(<span class="params">source</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> cloneObj = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(source))</div><div class="line"></div><div class="line">    <span class="keyword">var</span> keys = <span class="built_in">Object</span>.getOwnPropertyNames(source) <span class="comment">// `Object.keys`只能返回可枚举的属性</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; keys.length ; i ++)&#123;</div><div class="line">        <span class="built_in">Object</span>.defineProperty(cloneObj, keys[i], </div><div class="line">            <span class="built_in">Object</span>.getOwnPropetyDescriptor(source, keys[i]))</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cloneObj</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><pre><code class="javascript">
+</code></pre>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.soulserv.net/understanding-object-cloning-in-javascript-part-i/" target="_blank" rel="external">understanding-object-cloning-in-javascript-part-i</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/01/使用rollup/" class="archive-article-date">
-  	<time datetime="2017-04-30T17:32:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/01/使用rollup/">使用rollup</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">构建</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2016/05/05/javascript深浅拷贝/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/27/使用Vue全家桶开发知乎日报/" class="archive-article-date">
-  	<time datetime="2017-04-27T07:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-27</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/27/使用Vue全家桶开发知乎日报/">使用Vue全家桶开发知乎日报</a>
-    </h1>
+    <a href="/2017/04/23/treer-命令行生成目录结构的实用小工具/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          treer:命令行生成目录结构的实用小工具
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/14/三个关于数组的小技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">三个关于数组的小技巧</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="javascript深浅拷贝" data-title="javascript深浅拷贝" data-url="https://derycktse.github.io/2016/05/05/javascript深浅拷贝/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"deryck"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/27/实现拖拽/" class="archive-article-date">
-  	<time datetime="2017-04-26T16:17:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/27/实现拖拽/">实现拖拽</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/23/treer-命令行生成目录结构的实用小工具/" class="archive-article-date">
-  	<time datetime="2017-04-23T03:12:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/23/treer-命令行生成目录结构的实用小工具/">treer:命令行生成目录结构的实用小工具</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">npm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -337,8 +376,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

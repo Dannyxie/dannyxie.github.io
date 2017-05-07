@@ -417,6 +417,91 @@
 
 
   
+    <article id="post-javascript深浅拷贝" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/05/javascript深浅拷贝/">javascript深浅拷贝</a>
+    </h1>
+  
+
+        
+        <a href="/2016/05/05/javascript深浅拷贝/" class="archive-article-date">
+  	<time datetime="2016-05-05T11:47:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量</p>
+<p>例如下面例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> object = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125; ;  </div><div class="line"><span class="keyword">var</span> copy = object ;  </div><div class="line">object.a = <span class="number">3</span> ;  </div><div class="line"><span class="built_in">console</span>.log( copy.a ) ;</div></pre></td></tr></table></figure></p>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>遍历对象的属性，将属性赋值给新创建的对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowCopy</span>(<span class="params">source</span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> cloneObj = &#123;&#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> source)&#123;</div><div class="line">        cloneObj[key] = source[key]</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cloneObj</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是不是很简单，不过，上面的代码有几个问题:</p>
+<ul>
+<li>克隆出来的对象跟原本的对象原型链是不同的</li>
+<li>原本原型链上的属性，被克隆到了新对象上作为自有属性了</li>
+<li>只有可被枚举(<code>emuerable</code>)的属性被克隆了</li>
+<li>属性的<code>descriptor</code>并没有被克隆，比如原本为只读的访问属性，被克隆成可读写的属性了</li>
+<li>浅拷贝最重要的一个问题，如果属性本身是一个对象，那么克隆的对象以及原本的对象将共享这个属性</li>
+</ul>
+<p>为了完善上面的问题，我们可以使用<code>Object.getOwnPropertyNames()</code>来配合完善, <code>Object.keys</code>只能返回可枚举的属性</p>
+<p>我们来分析上面几个缺陷:</p>
+<p><strong>克隆出来的对象跟原本的对象原型链是不同的</strong></p>
+<p>我们可以通过获取原对象的原型对象(<code>Object.getPrototypeOf</code>)，再将克隆对象继承与该原型对象(<code>Object.create</code>)</p>
+<p><strong>原本原型链上的属性，被克隆到了新对象上作为自有属性了</strong></p>
+<p><strong>只有可被枚举(<code>emuerable</code>)的属性被克隆了</strong></p>
+<p>在复制过程中，我们可以先判断属性是否为自由属性(<code>Object.prototype.hasOwnProperty</code>)，当然，我们可以更简单的使用<code>Object.getOwnPropertyNames</code>，它可返回所有的自有属性（包括不可枚举的）</p>
+<p><strong>属性的<code>descriptor</code>并没有被克隆，比如原本为只读的访问属性，被克隆成可读写的属性了</strong><br><br>通过<code>Object.getOwnPropertyDescriptor</code>获取属性的descriptor之后使用<code>Object.defineProperty</code>定义到克隆对象中</p>
+<p>我们看下面的改良版<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowCopy</span>(<span class="params">source</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> cloneObj = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(source))</div><div class="line"></div><div class="line">    <span class="keyword">var</span> keys = <span class="built_in">Object</span>.getOwnPropertyNames(source) <span class="comment">// `Object.keys`只能返回可枚举的属性</span></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; keys.length ; i ++)&#123;</div><div class="line">        <span class="built_in">Object</span>.defineProperty(cloneObj, keys[i], </div><div class="line">            <span class="built_in">Object</span>.getOwnPropetyDescriptor(source, keys[i]))</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cloneObj</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><pre><code class="javascript">
+</code></pre>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.soulserv.net/understanding-object-cloning-in-javascript-part-i/" target="_blank" rel="external">understanding-object-cloning-in-javascript-part-i</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/05/05/javascript深浅拷贝/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-三个关于数组的小技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -455,11 +540,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">es2015</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">es2015</a>
         		</li>
       		
 		</ul>
@@ -731,75 +816,6 @@
 
 
   
-    <article id="post-浅谈javascript的原型及原型链" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/08/浅谈javascript的原型及原型链/">浅谈javascript的原型及原型链</a>
-    </h1>
-  
-
-        
-        <a href="/2016/03/08/浅谈javascript的原型及原型链/" class="archive-article-date">
-  	<time datetime="2016-03-08T14:26:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原型与原型链是javascript里面最最核心的内容，如果不能理解它们之间的存在关系的话，那么我们是不能理解这门语言的。</p>
-<p>在JS中，主要有两种创建对象的方法, 分别是对象字面量以及调用构造函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对象字面量</span></div><div class="line"><span class="keyword">var</span> obj1 = &#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">//调用构造函数</span></div><div class="line"><span class="keyword">var</span> obj2 = <span class="keyword">new</span> <span class="built_in">Object</span>()</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2016/03/08/浅谈javascript的原型及原型链/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">prototype</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/08/浅谈javascript的原型及原型链/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -905,7 +921,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -913,7 +929,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
