@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://derycktse.github.io/"/>
-  <updated>2017-04-30T17:36:59.000Z</updated>
+  <updated>2017-05-10T07:44:59.000Z</updated>
   <id>https://derycktse.github.io/</id>
   
   <author>
@@ -14,6 +14,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于点击鼠标右键在firefox上面的坑</title>
+    <link href="https://derycktse.github.io/2017/05/10/%E5%85%B3%E4%BA%8E%E7%82%B9%E5%87%BB%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E5%9C%A8firefox%E4%B8%8A%E9%9D%A2%E7%9A%84%E5%9D%91/"/>
+    <id>https://derycktse.github.io/2017/05/10/关于点击鼠标右键在firefox上面的坑/</id>
+    <published>2017-05-10T07:44:59.000Z</published>
+    <updated>2017-05-10T07:44:59.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>使用rollup</title>
