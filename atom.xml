@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://derycktse.github.io/"/>
-  <updated>2017-05-10T07:44:59.000Z</updated>
+  <updated>2017-05-10T08:00:43.000Z</updated>
   <id>https://derycktse.github.io/</id>
   
   <author>
@@ -20,9 +20,34 @@
     <link href="https://derycktse.github.io/2017/05/10/%E5%85%B3%E4%BA%8E%E7%82%B9%E5%87%BB%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E5%9C%A8firefox%E4%B8%8A%E9%9D%A2%E7%9A%84%E5%9D%91/"/>
     <id>https://derycktse.github.io/2017/05/10/关于点击鼠标右键在firefox上面的坑/</id>
     <published>2017-05-10T07:44:59.000Z</published>
-    <updated>2017-05-10T07:44:59.000Z</updated>
+    <updated>2017-05-10T08:00:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨天遇到一个这样的需求:</p>
+<p><strong>在浏览器内点击鼠标右键弹出菜单选项</strong></p>
+<a id="more"></a>
+<p>OK,这样的需求很简单，马上有了思路:</p>
+<ol>
+<li>写出菜单，默认隐藏</li>
+<li>在document上监听<code>contextmenu</code>事件，触发时显示菜单, 并阻止浏览器默认行为(重要，否则会显示浏览器自带的邮件菜单)</li>
+<li>监听document的<code>click</code>事件，隐藏菜单</li>
+<li>菜单监听自身的<code>click</code>事件，触发菜单自身事件，并阻止冒泡(否则会促发第三步的事件)</li>
+</ol>
+<p>想法一有，马上啪啪啪写出效果来，自己过了浏览器兼容性，基本OK</p>
+<p>但是……</p>
+<p>当在firefox上时，却发现一个奇怪的现象，点击右键的时候，菜单闪一下又隐藏了，这就说明第二步跟第三步的事件按序触发了.</p>
+<p>说明火狐在右键的时候，click事件也会同时触发，搜索了资料之后，发现这是一个古老的<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=71705" target="_blank" rel="external">bug</a>，到现在都没修好</p>
+<p>思考了一下，想到两种方式解决这个问题:</p>
+<ul>
+<li><code>contextmenu</code>触发后，马上锁定一个信号量，并设置短时间后停止(setTimeout方式解锁)，<code>click</code>事件触发时，当检测到锁定，那就不触发隐藏，如此便能解决，但是有一个问题，这样就没办法再短时间内右键又左键，稍微有点缺陷</li>
+<li>第二种方法便是，当<code>contextmenu</code>触发后，记录坐标，<code>click</code>事件触发时，检测坐标，如果一样（可设置偏差），便不触发。</li>
+</ul>
+<p>最终把问题解决了</p>
+]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;昨天遇到一个这样的需求:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在浏览器内点击鼠标右键弹出菜单选项&lt;/strong&gt;&lt;/p&gt;
     
     </summary>
     
@@ -154,10 +179,11 @@
     <link href="https://derycktse.github.io/2016/05/05/javascript%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/"/>
     <id>https://derycktse.github.io/2016/05/05/javascript深浅拷贝/</id>
     <published>2016-05-05T11:47:09.000Z</published>
-    <updated>2017-05-07T08:53:41.000Z</updated>
+    <updated>2017-05-10T08:01:15.000Z</updated>
     
     <content type="html"><![CDATA[<p>javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量</p>
 <p>例如下面例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> object = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125; ;  </div><div class="line"><span class="keyword">var</span> copy = object ;  </div><div class="line">object.a = <span class="number">3</span> ;  </div><div class="line"><span class="built_in">console</span>.log( copy.a ) ;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a>浅拷贝</h3><p>遍历对象的属性，将属性赋值给新创建的对象</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shallowCopy</span>(<span class="params">source</span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> cloneObj = &#123;&#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> source)&#123;</div><div class="line">        cloneObj[key] = source[key]</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cloneObj</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>是不是很简单，不过，上面的代码有几个问题:</p>
@@ -185,7 +211,7 @@
     <summary type="html">
     
       &lt;p&gt;javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量&lt;/p&gt;
-&lt;p&gt;例如下面例子&lt;br&gt;&lt;figure class=&quot;highlight ja
+&lt;p&gt;例如下面例子&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; object = &amp;#123; &lt;span class=&quot;attr&quot;&gt;a&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;, &lt;span class=&quot;attr&quot;&gt;b&lt;/span&gt;: &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; &amp;#125; ;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; copy = object ;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;object.a = &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt; ;  &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log( copy.a ) ;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
     
     </summary>
     

@@ -8,13 +8,19 @@
   <link rel="dns-prefetch" href="https://derycktse.github.io">
   <title>关于点击鼠标右键在firefox上面的坑 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="昨天遇到一个这样的需求:
+在浏览器内点击鼠标右键弹出菜单选项">
+<meta property="og:type" content="article">
 <meta property="og:title" content="关于点击鼠标右键在firefox上面的坑">
 <meta property="og:url" content="https://derycktse.github.io/2017/05/10/关于点击鼠标右键在firefox上面的坑/index.html">
 <meta property="og:site_name" content="Deryck">
-<meta property="og:updated_time" content="2017-05-10T07:44:59.000Z">
+<meta property="og:description" content="昨天遇到一个这样的需求:
+在浏览器内点击鼠标右键弹出菜单选项">
+<meta property="og:updated_time" content="2017-05-10T08:00:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于点击鼠标右键在firefox上面的坑">
+<meta name="twitter:description" content="昨天遇到一个这样的需求:
+在浏览器内点击鼠标右键弹出菜单选项">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -175,7 +181,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>昨天遇到一个这样的需求:</p>
+<p><strong>在浏览器内点击鼠标右键弹出菜单选项</strong></p>
+<a id="more"></a>
+<p>OK,这样的需求很简单，马上有了思路:</p>
+<ol>
+<li>写出菜单，默认隐藏</li>
+<li>在document上监听<code>contextmenu</code>事件，触发时显示菜单, 并阻止浏览器默认行为(重要，否则会显示浏览器自带的邮件菜单)</li>
+<li>监听document的<code>click</code>事件，隐藏菜单</li>
+<li>菜单监听自身的<code>click</code>事件，触发菜单自身事件，并阻止冒泡(否则会促发第三步的事件)</li>
+</ol>
+<p>想法一有，马上啪啪啪写出效果来，自己过了浏览器兼容性，基本OK</p>
+<p>但是……</p>
+<p>当在firefox上时，却发现一个奇怪的现象，点击右键的时候，菜单闪一下又隐藏了，这就说明第二步跟第三步的事件按序触发了.</p>
+<p>说明火狐在右键的时候，click事件也会同时触发，搜索了资料之后，发现这是一个古老的<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=71705" target="_blank" rel="external">bug</a>，到现在都没修好</p>
+<p>思考了一下，想到两种方式解决这个问题:</p>
+<ul>
+<li><code>contextmenu</code>触发后，马上锁定一个信号量，并设置短时间后停止(setTimeout方式解锁)，<code>click</code>事件触发时，当检测到锁定，那就不触发隐藏，如此便能解决，但是有一个问题，这样就没办法再短时间内右键又左键，稍微有点缺陷</li>
+<li>第二种方法便是，当<code>contextmenu</code>触发后，记录坐标，<code>click</code>事件触发时，检测坐标，如果一样（可设置偏差），便不触发。</li>
+</ul>
+<p>最终把问题解决了</p>
+
       
 
       
@@ -392,15 +418,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">npm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
