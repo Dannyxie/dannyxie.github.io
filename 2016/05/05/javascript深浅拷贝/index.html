@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Deryck">
 <meta property="og:description" content="javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量
 例如下面例子1234var object = &amp;#123; a: 1, b: 2 &amp;#125; ;  var copy = object ;  object.a = 3 ;  console.log( copy.a">
-<meta property="og:updated_time" content="2017-05-11T15:12:30.000Z">
+<meta property="og:updated_time" content="2017-05-12T09:50:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript深浅拷贝">
 <meta name="twitter:description" content="javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量
@@ -206,7 +206,13 @@
 <h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h3><p>上面已经讲诉了浅拷贝，浅拷贝只克隆对象的第一层属性，而对于再深层的属性来说，只是复制，并不是克隆，所以深层的属性如果是对象的话，还是指着相同的对象</p>
 <p>深拷也很简单，一个思想： 递归</p>
 <p>当属性为对象时，利用浅拷贝的思想进行递归调用，即是深拷贝</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">source</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> cloneObj = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(source))</div><div class="line"></div><div class="line">    <span class="keyword">var</span> keys = <span class="built_in">Object</span>.getOwnPropertyNames(source)</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>, length = keys.length ; i &lt; length; i++)&#123;</div><div class="line">        <span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(source, keys[i])</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(descriptor.value &amp;&amp; <span class="keyword">typeof</span> descriptor.vale === <span class="string">'object'</span>)&#123;</div><div class="line">            descriptor.value = deepCopy(descriptor.value)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">         <span class="built_in">Object</span>.defineProperty( cloneObj , keys[ i ] , descriptor ) ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cloneObj</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span>(<span class="params">source</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> cloneObj = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.getPrototypeOf(source))</div><div class="line"></div><div class="line">    <span class="keyword">var</span> keys = <span class="built_in">Object</span>.getOwnPropertyNames(source)</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>, length = keys.length ; i &lt; length; i++)&#123;</div><div class="line">        <span class="keyword">var</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(source, keys[i])</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(descriptor.value &amp;&amp; <span class="keyword">typeof</span> descriptor.value === <span class="string">'object'</span>)&#123;<span class="comment">//如果属性是访问属性（getter/setter）的话，这里的descriptor.value === 'undefined'</span></div><div class="line">            descriptor.value = deepCopy(descriptor.value)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">         <span class="built_in">Object</span>.defineProperty( cloneObj , keys[ i ] , descriptor ) ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cloneObj</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>好了，上面这个深拷贝完成了，但是还是有这几个问题:</p>
+<ul>
+<li>循环指向的属性会使得内存泄漏</li>
+</ul>
+<h4 id="循环指向"><a href="#循环指向" class="headerlink" title="循环指向"></a>循环指向</h4><p>看下面的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    <span class="attr">a</span> : <span class="string">'a'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">o.loop = o</div></pre></td></tr></table></figure></p>
+<p>如果调用上述的<code>deepCopy</code>，则我们会陷入到o.loop.loop.loop.loop.loop.loop…这样的循环中去</p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.soulserv.net/understanding-object-cloning-in-javascript-part-i/" target="_blank" rel="external">understanding-object-cloning-in-javascript-part-i</a></p>
 
       
@@ -461,11 +467,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">es2015</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color2">es2015</a>
               </li>
              
               <li class="article-tag-list-item">
