@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Deryck">
 <meta property="og:description" content="javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量
 例如下面例子1234var object = &amp;#123; a: 1, b: 2 &amp;#125; ;  var copy = object ;  object.a = 3 ;  console.log( copy.a">
-<meta property="og:updated_time" content="2017-05-12T09:50:32.000Z">
+<meta property="og:updated_time" content="2017-05-15T14:39:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript深浅拷贝">
 <meta name="twitter:description" content="javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量
@@ -210,10 +210,13 @@
 <p>好了，上面这个深拷贝完成了，但是还是有这几个问题:</p>
 <ul>
 <li>循环指向的属性会使得内存泄漏</li>
+<li>如果对象的方法引用到闭包中的变量，则无法克隆</li>
 </ul>
 <h4 id="循环指向"><a href="#循环指向" class="headerlink" title="循环指向"></a>循环指向</h4><p>看下面的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    <span class="attr">a</span> : <span class="string">'a'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">o.loop = o</div></pre></td></tr></table></figure></p>
 <p>如果调用上述的<code>deepCopy</code>，则我们会陷入到o.loop.loop.loop.loop.loop.loop…这样的循环中去</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.soulserv.net/understanding-object-cloning-in-javascript-part-i/" target="_blank" rel="external">understanding-object-cloning-in-javascript-part-i</a></p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>我们看下面的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">myConstructor</span>(<span class="params"></span>)  </span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> myPrivateVar = <span class="string">'secret'</span> ;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">myPublicVar</span>: <span class="string">'public!'</span> ,</div><div class="line">        <span class="attr">getMyPrivateVar</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> myPrivateVar ;</div><div class="line">        &#125; ,</div><div class="line">        setMyPrivateVar( value ) &#123;</div><div class="line">            myPrivateVar = value.toString() ;</div><div class="line">        &#125;</div><div class="line">    &#125; ;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o = myContructor() ;  </div><div class="line"><span class="keyword">var</span> cloneObj = deepCopy(o)</div></pre></td></tr></table></figure></p>
+<p>上面的例子我们可以看到，对象o中的方法<code>getMyPrivateVar</code>与<code>setMyPrivateVar</code>均访问到了闭包变量<code>myPrivateVar</code>，这里通过o对<code>myPrivateVar</code>的修改，cloneObj的<code>myPrivateVar</code>同样会受影响, 因为私有变量是没办法</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://blog.soulserv.net/understanding-object-cloning-in-javascript-part-i/" target="_blank" rel="external">understanding-object-cloning-in-javascript-part-i</a><br><a href="http://blog.soulserv.net/understanding-object-cloning-in-javascript-part-ii/" target="_blank" rel="external">Understanding Object Cloning in Javascript - Part. II</a></p>
 
       
 
@@ -467,11 +470,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
+                <a href="javascript:void(0)" class="js-tag color2">es2015</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">es2015</a>
+                <a href="javascript:void(0)" class="js-tag color4">Vue</a>
               </li>
              
               <li class="article-tag-list-item">
