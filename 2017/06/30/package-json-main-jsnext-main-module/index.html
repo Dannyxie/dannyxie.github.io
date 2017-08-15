@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="https://derycktse.github.io">
   <title>package.json中的main,jsnext:main,module分别是干什么用的 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="main我们来看npm官方的定义:12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quot">
+  <meta name="description" content="main我们来看npm官方的定义: 12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="package.json中的main,jsnext:main,module分别是干什么用的">
 <meta property="og:url" content="https://derycktse.github.io/2017/06/30/package-json-main-jsnext-main-module/index.html">
 <meta property="og:site_name" content="Deryck">
-<meta property="og:description" content="main我们来看npm官方的定义:12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quot">
-<meta property="og:updated_time" content="2017-08-15T15:19:33.000Z">
+<meta property="og:description" content="main我们来看npm官方的定义: 12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quo">
+<meta property="og:updated_time" content="2017-08-15T15:23:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="package.json中的main,jsnext:main,module分别是干什么用的">
-<meta name="twitter:description" content="main我们来看npm官方的定义:12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quot">
+<meta name="twitter:description" content="main我们来看npm官方的定义: 12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quo">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -177,7 +177,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>我们来看<a href="https://docs.npmjs.com/files/package.json#main" target="_blank" rel="external">npm</a>官方的定义:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&quot;foo&quot;), then your main module&apos;s exports object will be returned.</div><div class="line"></div><div class="line">This should be a module ID relative to the root of your package folder.</div><div class="line"></div><div class="line">For most modules, it makes the most sense to have a main script and often not much else.</div></pre></td></tr></table></figure></p>
+        <h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>我们来看<a href="https://docs.npmjs.com/files/package.json#main" target="_blank" rel="external">npm</a>官方的定义:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&quot;foo&quot;), then your main module&apos;s exports object will be returned.</div><div class="line"></div><div class="line">This should be a module ID relative to the root of your package folder.</div><div class="line"></div><div class="line">For most modules, it makes the most sense to have a main script and often not much else.</div></pre></td></tr></table></figure>
 <p>简单说<code>main</code>字段定义了我们程序的主要入口，用户在<code>require</code>我们模块的时候，程序会从<code>main</code>字段中找到我们程序的主要入口，从而输出我们的代码依赖.</p>
 <p>在这里,<code>main</code>字段用来指向commonjs的模块</p>
 <h2 id="jsnext-main-与-module"><a href="#jsnext-main-与-module" class="headerlink" title="jsnext:main 与 module"></a>jsnext:main 与 module</h2><p><code>jsnext:main</code> 与 <code>module</code>的作用是一样的， 但是由于<code>module</code>更直白一点，所以现在使用<code>module</code>. 在这里我们讨论<code>module</code></p>
@@ -410,19 +411,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">react</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">npm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
               <li class="article-tag-list-item">
