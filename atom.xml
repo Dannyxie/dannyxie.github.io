@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://derycktse.github.io/"/>
-  <updated>2017-08-13T13:07:07.000Z</updated>
+  <updated>2017-08-15T12:30:17.000Z</updated>
   <id>https://derycktse.github.io/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>react组件的生命周期</title>
+    <link href="https://derycktse.github.io/2017/08/15/react%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+    <id>https://derycktse.github.io/2017/08/15/react生命周期/</id>
+    <published>2017-08-15T12:18:41.000Z</published>
+    <updated>2017-08-15T12:30:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>constructor</li>
+<li>componentWillMount</li>
+<li>ComponentDidMount</li>
+<li>render</li>
+<li>componentWillReceiveProps</li>
+<li>shouldConponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>componentDidUpdate</li>
+<li>componentWillUnmount</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">React.Component</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;constructor&lt;/li&gt;
+&lt;li&gt;componentWillMount&lt;/li&gt;
+&lt;li&gt;ComponentDidMount&lt;/li&gt;
+&lt;li&gt;render&lt;/li&gt;
+&lt;li&gt;componentWillReceiveProps&lt;/li&gt;
+&lt;li&gt;shou
+    
+    </summary>
+    
+    
+      <category term="react" scheme="https://derycktse.github.io/tags/react/"/>
+    
+  </entry>
   
   <entry>
     <title>electron使用sqlite</title>

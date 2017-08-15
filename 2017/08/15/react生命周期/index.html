@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://derycktse.github.io">
-  <title>vue源码学习笔记 | Deryck</title>
+  <title>react组件的生命周期 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[83fac017f96f34c92c3578796a7ddb443d4e1f17]使用grunt作为构建工具npm + component作为包的管理 [871ed9126639c9128c18bb2f19e6afd42c0c5ad9]新增加了一个数据绑定的实例大致思路：  html结构中新增占位符号 将有占位符号的DOM保存起来，同时拥有一个对象将DOM关联起来 使用Object.define">
+  <meta name="description" content="constructor componentWillMount ComponentDidMount render componentWillReceiveProps shouldConponentUpdate componentWillUpdate componentDidUpdate componentWillUnmount  参考文档React.Component">
+<meta name="keywords" content="react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue源码学习笔记">
-<meta property="og:url" content="https://derycktse.github.io/2016/04/05/vue源码/index.html">
+<meta property="og:title" content="react组件的生命周期">
+<meta property="og:url" content="https://derycktse.github.io/2017/08/15/react生命周期/index.html">
 <meta property="og:site_name" content="Deryck">
-<meta property="og:description" content="[83fac017f96f34c92c3578796a7ddb443d4e1f17]使用grunt作为构建工具npm + component作为包的管理 [871ed9126639c9128c18bb2f19e6afd42c0c5ad9]新增加了一个数据绑定的实例大致思路：  html结构中新增占位符号 将有占位符号的DOM保存起来，同时拥有一个对象将DOM关联起来 使用Object.define">
-<meta property="og:updated_time" content="2017-04-26T16:15:05.000Z">
+<meta property="og:description" content="constructor componentWillMount ComponentDidMount render componentWillReceiveProps shouldConponentUpdate componentWillUpdate componentDidUpdate componentWillUnmount  参考文档React.Component">
+<meta property="og:updated_time" content="2017-08-15T12:30:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue源码学习笔记">
-<meta name="twitter:description" content="[83fac017f96f34c92c3578796a7ddb443d4e1f17]使用grunt作为构建工具npm + component作为包的管理 [871ed9126639c9128c18bb2f19e6afd42c0c5ad9]新增加了一个数据绑定的实例大致思路：  html结构中新增占位符号 将有占位符号的DOM保存起来，同时拥有一个对象将DOM关联起来 使用Object.define">
+<meta name="twitter:title" content="react组件的生命周期">
+<meta name="twitter:description" content="constructor componentWillMount ComponentDidMount render componentWillReceiveProps shouldConponentUpdate componentWillUpdate componentDidUpdate componentWillUnmount  参考文档React.Component">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -157,36 +158,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-vue源码" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-react生命周期" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      vue源码学习笔记
+      react组件的生命周期
     </h1>
   
 
         
-        <a href="/2016/04/05/vue源码/" class="archive-article-date">
-  	<time datetime="2016-04-05T06:48:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-05</time>
+        <a href="/2017/08/15/react生命周期/" class="archive-article-date">
+  	<time datetime="2017-08-15T12:18:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="83fac017f96f34c92c3578796a7ddb443d4e1f17"><a href="#83fac017f96f34c92c3578796a7ddb443d4e1f17" class="headerlink" title="[83fac017f96f34c92c3578796a7ddb443d4e1f17]"></a>[83fac017f96f34c92c3578796a7ddb443d4e1f17]</h3><p>使用grunt作为构建工具<br>npm + component作为包的管理</p>
-<h3 id="871ed9126639c9128c18bb2f19e6afd42c0c5ad9"><a href="#871ed9126639c9128c18bb2f19e6afd42c0c5ad9" class="headerlink" title="[871ed9126639c9128c18bb2f19e6afd42c0c5ad9]"></a>[871ed9126639c9128c18bb2f19e6afd42c0c5ad9]</h3><p>新增加了一个数据绑定的实例<br>大致思路：</p>
-<ul>
-<li>html结构中新增占位符号</li>
-<li>将有占位符号的DOM保存起来，同时拥有一个对象将DOM关联起来</li>
-<li>使用Object.defineProperty为这个对象的属性进行绑定访问器，如果修改了这个访问器的话，也将更改更新到DOM中 </li>
+        <ul>
+<li>constructor</li>
+<li>componentWillMount</li>
+<li>ComponentDidMount</li>
+<li>render</li>
+<li>componentWillReceiveProps</li>
+<li>shouldConponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>componentDidUpdate</li>
+<li>componentWillUnmount</li>
 </ul>
-<p><a href="https://github.com/vuejs/vue/blob/871ed9126639c9128c18bb2f19e6afd42c0c5ad9/explorations%2Fgetset.html" target="_blank" rel="external">实例地址</a></p>
-<h3 id="a5e27b1174e9196dcc9dbb0becc487275ea2e84c"><a href="#a5e27b1174e9196dcc9dbb0becc487275ea2e84c" class="headerlink" title="[a5e27b1174e9196dcc9dbb0becc487275ea2e84c]"></a>[a5e27b1174e9196dcc9dbb0becc487275ea2e84c]</h3><p>作者同时使用了compoent的包管理工具<br>看提交时间必须使用component@0.16.3这个版本</p>
-<p>修改了main.js，主要思想即是通过解析拥有指定属性的DOM，然后将它们存入到对象之中，为这个对象绑定访问选择器（set,get）从而将更新修改到DOM中</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">React.Component</a></p>
 
       
 
@@ -216,6 +219,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -266,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2016/04/05/vue源码/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2017/08/15/react生命周期/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,18 +294,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/04/14/三个关于数组的小技巧/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          三个关于数组的小技巧
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/03/16/webpack使用require-ensure进行代码分割/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">webpack使用require.ensure进行代码分割</div>
+    <a href="/2017/08/13/electron使用sqlite/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">electron使用sqlite</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -305,7 +310,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="vue源码" data-title="vue源码学习笔记" data-url="https://derycktse.github.io/2016/04/05/vue源码/"></div>
+	<div class="ds-thread" data-thread-key="react生命周期" data-title="react组件的生命周期" data-url="https://derycktse.github.io/2017/08/15/react生命周期/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
