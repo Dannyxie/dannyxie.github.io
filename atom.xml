@@ -82,11 +82,11 @@
     <link href="https://derycktse.github.io/2017/06/30/package-json-main-jsnext-main-module/"/>
     <id>https://derycktse.github.io/2017/06/30/package-json-main-jsnext-main-module/</id>
     <published>2017-06-30T03:16:08.000Z</published>
-    <updated>2017-08-15T15:23:47.000Z</updated>
+    <updated>2017-08-15T15:24:54.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>我们来看<a href="https://docs.npmjs.com/files/package.json#main" target="_blank" rel="external">npm</a>官方的定义:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&quot;foo&quot;), then your main module&apos;s exports object will be returned.</div><div class="line"></div><div class="line">This should be a module ID relative to the root of your package folder.</div><div class="line"></div><div class="line">For most modules, it makes the most sense to have a main script and often not much else.</div></pre></td></tr></table></figure>
-<p>简单说<code>main</code>字段定义了我们程序的主要入口，用户在<code>require</code>我们模块的时候，程序会从<code>main</code>字段中找到我们程序的主要入口，从而输出我们的代码依赖.</p>
+<p>简单说main字段定义了我们程序的主要入口，用户在require我们模块的时候，程序会从main字段中找到我们程序的主要入口，从而输出我们的代码依赖.</p>
 <p>在这里,<code>main</code>字段用来指向commonjs的模块</p>
 <h2 id="jsnext-main-与-module"><a href="#jsnext-main-与-module" class="headerlink" title="jsnext:main 与 module"></a>jsnext:main 与 module</h2><p><code>jsnext:main</code> 与 <code>module</code>的作用是一样的， 但是由于<code>module</code>更直白一点，所以现在使用<code>module</code>. 在这里我们讨论<code>module</code></p>
 <p><code>module</code>字段会指向一个ES2015 模块的入口, 当使用<code>rollup</code>这些模块的bundler时，由于使用了ES2015 的模块，可以再做<code>tree shaking</code>优化</p>
