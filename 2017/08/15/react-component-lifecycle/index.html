@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://derycktse.github.io">
-  <title>实现拖拽 | Deryck</title>
+  <title>react组件的生命周期 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="今天在写一个拖拽效果，其实实现原理比较简单 通过mousedown, mousemove, mouseup加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。">
+  <meta name="description" content="constructor componentWillMount ComponentDidMount render componentWillReceiveProps shouldConponentUpdate componentWillUpdate componentDidUpdate componentWillUnmount  参考文档React.Component">
+<meta name="keywords" content="react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="实现拖拽">
-<meta property="og:url" content="https://derycktse.github.io/2017/04/27/实现拖拽/index.html">
+<meta property="og:title" content="react组件的生命周期">
+<meta property="og:url" content="https://derycktse.github.io/2017/08/15/react-component-lifecycle/index.html">
 <meta property="og:site_name" content="Deryck">
-<meta property="og:description" content="今天在写一个拖拽效果，其实实现原理比较简单 通过mousedown, mousemove, mouseup加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。">
-<meta property="og:updated_time" content="2017-05-16T08:11:40.000Z">
+<meta property="og:description" content="constructor componentWillMount ComponentDidMount render componentWillReceiveProps shouldConponentUpdate componentWillUpdate componentDidUpdate componentWillUnmount  参考文档React.Component">
+<meta property="og:updated_time" content="2017-08-15T15:15:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实现拖拽">
-<meta name="twitter:description" content="今天在写一个拖拽效果，其实实现原理比较简单 通过mousedown, mousemove, mouseup加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。">
+<meta name="twitter:title" content="react组件的生命周期">
+<meta name="twitter:description" content="constructor componentWillMount ComponentDidMount render componentWillReceiveProps shouldConponentUpdate componentWillUpdate componentDidUpdate componentWillUnmount  参考文档React.Component">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -157,35 +158,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-实现拖拽" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-react-component-lifecycle" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      实现拖拽
+      react组件的生命周期
     </h1>
   
 
         
-        <a href="/2017/04/27/实现拖拽/" class="archive-article-date">
-  	<time datetime="2017-04-26T16:17:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-27</time>
+        <a href="/2017/08/15/react-component-lifecycle/" class="archive-article-date">
+  	<time datetime="2017-08-15T12:18:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天在写一个拖拽效果，其实实现原理比较简单</p>
-<p>通过<code>mousedown</code>, <code>mousemove</code>, <code>mouseup</code>加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。</p>
-<a id="more"></a>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createDraggable</span>(<span class="params">ele</span>)</span>&#123;</div><div class="line">	<span class="comment">/*mousedown</span></div><div class="line"><span class="comment">	mousemove</span></div><div class="line"><span class="comment">	mouseup*/</span></div><div class="line">	<span class="keyword">var</span> moveFlag = <span class="literal">false</span></div><div class="line">	on(ele,<span class="string">'mousedown'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">		moveFlag = <span class="literal">true</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'touch start'</span>)</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span></div><div class="line">	&#125;)</div><div class="line">	on(ele,<span class="string">'mousemove'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'moving'</span>)</div><div class="line">		<span class="keyword">if</span>(!moveFlag) <span class="keyword">return</span> </div><div class="line">			<span class="keyword">var</span> event = e || <span class="built_in">window</span>.event</div><div class="line">		<span class="keyword">var</span> offsetX = e.clientX - <span class="number">50</span></div><div class="line">		, offsetY = e.clientY - <span class="number">50</span></div><div class="line">		</div><div class="line">		ele.style.left = offsetX + <span class="string">'px'</span>,</div><div class="line">		ele.style.top = offsetY + <span class="string">'px'</span></div><div class="line">	</div><div class="line">	&#125;)</div><div class="line">	on(ele,<span class="string">'mouseup'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		moveFlag = <span class="literal">false</span></div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'touch end'</span>)</div><div class="line">	&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>原本我的代码都是绑定在目标dom上，这个时候会发现当鼠标甩动过快的时候，焦点会在目标dom外，导致这个时候行为看起来很卡</p>
-<p>接着修改<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">on(<span class="built_in">window</span>,<span class="string">'mousemove'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'moving'</span>)</div><div class="line">		<span class="keyword">if</span>(!moveFlag) <span class="keyword">return</span> </div><div class="line">			<span class="keyword">var</span> event = e || <span class="built_in">window</span>.event</div><div class="line">		<span class="keyword">var</span> offsetX = e.clientX - <span class="number">50</span></div><div class="line">		, offsetY = e.clientY - <span class="number">50</span></div><div class="line">		</div><div class="line">		ele.style.left = offsetX + <span class="string">'px'</span>,</div><div class="line">		ele.style.top = offsetY + <span class="string">'px'</span></div><div class="line">	</div><div class="line">	&#125;)</div></pre></td></tr></table></figure></p>
-<p>主流浏览器看起来正常了，却发现IE8移动不了！！！</p>
-<p>最终发现应该是<code>mousemove</code>时间并没有冒泡到<code>window</code>对象上, 改为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">on(<span class="built_in">document</span>,<span class="string">'mousemove'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'moving'</span>)</div><div class="line">		<span class="keyword">if</span>(!moveFlag) <span class="keyword">return</span> </div><div class="line">			<span class="keyword">var</span> event = e || <span class="built_in">window</span>.event</div><div class="line">		<span class="keyword">var</span> offsetX = e.clientX - <span class="number">50</span></div><div class="line">		, offsetY = e.clientY - <span class="number">50</span></div><div class="line">		</div><div class="line">		ele.style.left = offsetX + <span class="string">'px'</span>,</div><div class="line">		ele.style.top = offsetY + <span class="string">'px'</span></div><div class="line">	</div><div class="line">	&#125;)</div></pre></td></tr></table></figure></p>
-<p>效果终于看起来OK啦<br>见<a href="/code-demo/draggable%20object/index1.html">demo</a></p>
+        <ul>
+<li>constructor</li>
+<li>componentWillMount</li>
+<li>ComponentDidMount</li>
+<li>render</li>
+<li>componentWillReceiveProps</li>
+<li>shouldConponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>componentDidUpdate</li>
+<li>componentWillUnmount</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">React.Component</a></p>
 
       
 
@@ -215,6 +219,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -265,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2017/04/27/实现拖拽/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2017/08/15/react-component-lifecycle/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -279,18 +294,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/04/27/使用Vue全家桶开发知乎日报/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/15/react生命周期/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          使用Vue全家桶开发知乎日报
+          react组件的生命周期
         
       </div>
     </a>
   
   
-    <a href="/2017/04/23/treer-命令行生成目录结构的实用小工具/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">treer:命令行生成目录结构的实用小工具</div>
+    <a href="/2017/08/13/electron使用sqlite/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">electron使用sqlite</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -304,7 +319,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="实现拖拽" data-title="实现拖拽" data-url="https://derycktse.github.io/2017/04/27/实现拖拽/"></div>
+	<div class="ds-thread" data-thread-key="react-component-lifecycle" data-title="react组件的生命周期" data-url="https://derycktse.github.io/2017/08/15/react-component-lifecycle/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

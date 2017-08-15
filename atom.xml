@@ -54,6 +54,44 @@
   </entry>
   
   <entry>
+    <title>react组件的生命周期</title>
+    <link href="https://derycktse.github.io/2017/08/15/react-component-lifecycle/"/>
+    <id>https://derycktse.github.io/2017/08/15/react-component-lifecycle/</id>
+    <published>2017-08-15T12:18:41.000Z</published>
+    <updated>2017-08-15T15:15:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>constructor</li>
+<li>componentWillMount</li>
+<li>ComponentDidMount</li>
+<li>render</li>
+<li>componentWillReceiveProps</li>
+<li>shouldConponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>componentDidUpdate</li>
+<li>componentWillUnmount</li>
+</ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">React.Component</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;constructor&lt;/li&gt;
+&lt;li&gt;componentWillMount&lt;/li&gt;
+&lt;li&gt;ComponentDidMount&lt;/li&gt;
+&lt;li&gt;render&lt;/li&gt;
+&lt;li&gt;componentWillReceiveProps&lt;/li&gt;
+&lt;li&gt;shou
+    
+    </summary>
+    
+    
+      <category term="react" scheme="https://derycktse.github.io/tags/react/"/>
+    
+  </entry>
+  
+  <entry>
     <title>electron使用sqlite</title>
     <link href="https://derycktse.github.io/2017/08/13/electron%E4%BD%BF%E7%94%A8sqlite/"/>
     <id>https://derycktse.github.io/2017/08/13/electron使用sqlite/</id>
