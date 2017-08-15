@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://derycktse.github.io">
-  <title>electron使用sqlite | Deryck</title>
+  <title>package.json中的main,jsnext:main,module分别是干什么用的 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在electron使用sqlite3的时候，会出现错误: 1Uncaught Error: Cannot find module ‘/…/node_modules/sqlite3/lib/binding/node-v51-darwin-x64/node_sqlite3.node’ 可以使用electron-rebuild解决:12$ npm install --save-dev electron-">
+  <meta name="description" content="main我们来看npm官方的定义:12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="electron使用sqlite">
-<meta property="og:url" content="https://derycktse.github.io/2017/08/13/electron使用sqlite/index.html">
+<meta property="og:title" content="package.json中的main,jsnext:main,module分别是干什么用的">
+<meta property="og:url" content="https://derycktse.github.io/2017/06/30/package-json-main-jsnext-main-module/index.html">
 <meta property="og:site_name" content="Deryck">
-<meta property="og:description" content="在electron使用sqlite3的时候，会出现错误: 1Uncaught Error: Cannot find module ‘/…/node_modules/sqlite3/lib/binding/node-v51-darwin-x64/node_sqlite3.node’ 可以使用electron-rebuild解决:12$ npm install --save-dev electron-">
-<meta property="og:updated_time" content="2017-08-13T13:07:07.000Z">
+<meta property="og:description" content="main我们来看npm官方的定义:12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quot">
+<meta property="og:updated_time" content="2017-08-15T15:19:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="electron使用sqlite">
-<meta name="twitter:description" content="在electron使用sqlite3的时候，会出现错误: 1Uncaught Error: Cannot find module ‘/…/node_modules/sqlite3/lib/binding/node-v51-darwin-x64/node_sqlite3.node’ 可以使用electron-rebuild解决:12$ npm install --save-dev electron-">
+<meta name="twitter:title" content="package.json中的main,jsnext:main,module分别是干什么用的">
+<meta name="twitter:description" content="main我们来看npm官方的定义:12345The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&amp;quot;foo&amp;quot">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -157,31 +157,33 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-electron使用sqlite" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-package-json-main-jsnext-main-module" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      electron使用sqlite
+      package.json中的main,jsnext:main,module分别是干什么用的
     </h1>
   
 
         
-        <a href="/2017/08/13/electron使用sqlite/" class="archive-article-date">
-  	<time datetime="2017-08-13T13:06:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-13</time>
+        <a href="/2017/06/30/package-json-main-jsnext-main-module/" class="archive-article-date">
+  	<time datetime="2017-06-30T03:16:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在electron使用sqlite3的时候，会出现错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uncaught Error: Cannot find module ‘/…/node_modules/sqlite3/lib/binding/node-v51-darwin-x64/node_sqlite3.node’</div></pre></td></tr></table></figure>
-<p>可以使用electron-rebuild解决:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install --save-dev electron-rebuild</div><div class="line">$ npm install --save sqlite3</div></pre></td></tr></table></figure></p>
-<p>在<code>package.json</code>加上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;rebuild&quot;: &quot;electron-rebuild -f -w sqlite3&quot;</div></pre></td></tr></table></figure></p>
-<p>执行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run rebuild</div></pre></td></tr></table></figure></p>
+        <h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>我们来看<a href="https://docs.npmjs.com/files/package.json#main" target="_blank" rel="external">npm</a>官方的定义:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&quot;foo&quot;), then your main module&apos;s exports object will be returned.</div><div class="line"></div><div class="line">This should be a module ID relative to the root of your package folder.</div><div class="line"></div><div class="line">For most modules, it makes the most sense to have a main script and often not much else.</div></pre></td></tr></table></figure></p>
+<p>简单说<code>main</code>字段定义了我们程序的主要入口，用户在<code>require</code>我们模块的时候，程序会从<code>main</code>字段中找到我们程序的主要入口，从而输出我们的代码依赖.</p>
+<p>在这里,<code>main</code>字段用来指向commonjs的模块</p>
+<h2 id="jsnext-main-与-module"><a href="#jsnext-main-与-module" class="headerlink" title="jsnext:main 与 module"></a>jsnext:main 与 module</h2><p><code>jsnext:main</code> 与 <code>module</code>的作用是一样的， 但是由于<code>module</code>更直白一点，所以现在使用<code>module</code>. 在这里我们讨论<code>module</code></p>
+<p><code>module</code>字段会指向一个ES2015 模块的入口, 当使用<code>rollup</code>这些模块的bundler时，由于使用了ES2015 的模块，可以再做<code>tree shaking</code>优化</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://shuheikagawa.com/blog/2017/01/05/main-jsnext-main-and-module/" target="_blank" rel="external">http://shuheikagawa.com/blog/2017/01/05/main-jsnext-main-and-module/</a><br><a href="https://github.com/jsforum/jsforum/issues/5" target="_blank" rel="external">https://github.com/jsforum/jsforum/issues/5</a><br><a href="https://www.reddit.com/r/javascript/comments/5jwg9c/confused_about_fields_module_and_jsnextmain_in/" target="_blank" rel="external">https://www.reddit.com/r/javascript/comments/5jwg9c/confused_about_fields_module_and_jsnextmain_in/</a><br>rollup wiki</p>
+<p><a href="https://github.com/rollup/rollup/wiki/pkg.module" target="_blank" rel="external">https://github.com/rollup/rollup/wiki/pkg.module</a><br><a href="https://github.com/rollup/rollup/wiki/jsnext:main" target="_blank" rel="external">https://github.com/rollup/rollup/wiki/jsnext:main</a></p>
 
       
 
@@ -261,7 +263,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2017/08/13/electron使用sqlite/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2017/06/30/package-json-main-jsnext-main-module/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -275,18 +277,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/15/react-component-lifecycle/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/13/use-sqlite-in-electron/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          react组件的生命周期
+          electron使用sqlite
         
       </div>
     </a>
   
   
-    <a href="/2017/06/30/package-json中的main-jsnext-main-module分别是干什么用的/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">package.json中的main,jsnext:main,module分别是干什么用的</div>
+    <a href="/2017/05/10/关于点击鼠标右键在firefox上面的坑/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于点击鼠标右键在firefox上面的坑</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -300,7 +302,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="electron使用sqlite" data-title="electron使用sqlite" data-url="https://derycktse.github.io/2017/08/13/electron使用sqlite/"></div>
+	<div class="ds-thread" data-thread-key="package-json-main-jsnext-main-module" data-title="package.json中的main,jsnext:main,module分别是干什么用的" data-url="https://derycktse.github.io/2017/06/30/package-json-main-jsnext-main-module/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
