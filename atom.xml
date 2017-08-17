@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://derycktse.github.io/"/>
-  <updated>2017-08-15T15:15:12.000Z</updated>
+  <updated>2017-08-17T06:42:10.000Z</updated>
   <id>https://derycktse.github.io/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="https://derycktse.github.io/2017/08/15/react-component-lifecycle/"/>
     <id>https://derycktse.github.io/2017/08/15/react-component-lifecycle/</id>
     <published>2017-08-15T12:18:41.000Z</published>
-    <updated>2017-08-15T15:15:12.000Z</updated>
+    <updated>2017-08-17T06:42:10.000Z</updated>
     
-    <content type="html"><![CDATA[<ul>
+    <content type="html"><![CDATA[<p>react组件生命周期</p>
+<ul>
 <li>constructor</li>
 <li>componentWillMount</li>
 <li>ComponentDidMount</li>
@@ -33,18 +34,44 @@
 <li>componentDidUpdate</li>
 <li>componentWillUnmount</li>
 </ul>
+<p>普通的react组件，一般会依次经历一下阶段:</p>
+<ol>
+<li>constructor</li>
+<li>componentWillMount</li>
+<li>render</li>
+<li>ComponentDidMount</li>
+</ol>
+<p>当react组件内部state有更新时:</p>
+<ol>
+<li>shouldConponentUpdate (当shouldConponentUpdate返回值为false的时候，之后的生命周期不会执行)</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ol>
+<p>当react组件接收的props值有更新时:</p>
+<ol>
+<li>componentWillReceiveProps</li>
+<li>shouldConponentUpdate (当shouldConponentUpdate返回值为false的时候，之后的生命周期不会执行)</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ol>
+<p>删除react组件:</p>
+<ol>
+<li>componentWillUnmount</li>
+</ol>
 <h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">React.Component</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;ul&gt;
+      &lt;p&gt;react组件生命周期&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;constructor&lt;/li&gt;
 &lt;li&gt;componentWillMount&lt;/li&gt;
 &lt;li&gt;ComponentDidMount&lt;/li&gt;
 &lt;li&gt;render&lt;/li&gt;
-&lt;li&gt;componentWillReceiveProps&lt;/li&gt;
-&lt;li&gt;shou
+&lt;li&gt;componentWillReceive
     
     </summary>
     
@@ -82,10 +109,10 @@
     <link href="https://derycktse.github.io/2017/06/30/package-json-main-jsnext-main-module/"/>
     <id>https://derycktse.github.io/2017/06/30/package-json-main-jsnext-main-module/</id>
     <published>2017-06-30T03:16:08.000Z</published>
-    <updated>2017-08-15T15:29:24.000Z</updated>
+    <updated>2017-08-15T15:31:23.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>我们来看<a href="https://docs.npmjs.com/files/package.json#main" target="_blank" rel="external">npm</a>官方的定义:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&quot;foo&quot;), then your main module&apos;s exports object will be returned.</div><div class="line"></div><div class="line">This should be a module ID relative to the root of your package folder.</div><div class="line"></div><div class="line">For most modules, it makes the most sense to have a main script and often not much else.</div></pre></td></tr></table></figure>
+    <content type="html"><![CDATA[<h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>我们来看<a href="https://docs.npmjs.com/files/package.json#main" target="_blank" rel="external">npm</a>官方的定义:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&quot;foo&quot;), then your main module&apos;s exports object will be returned.</div><div class="line"></div><div class="line">This should be a module ID relative to the root of your package folder.</div><div class="line"></div><div class="line">For most modules, it makes the most sense to have a main script and often not much else.</div></pre></td></tr></table></figure></p>
+<p>简单说<code>main</code>字段定义了我们程序的主要入口，用户在<code>require</code>我们模块的时候，程序会从<code>main</code>字段中找到我们程序的主要入口，从而输出我们的代码依赖.</p>
 <p>在这里,<code>main</code>字段用来指向commonjs的模块</p>
 <h2 id="jsnext-main-与-module"><a href="#jsnext-main-与-module" class="headerlink" title="jsnext:main 与 module"></a>jsnext:main 与 module</h2><p><code>jsnext:main</code> 与 <code>module</code>的作用是一样的， 但是由于<code>module</code>更直白一点，所以现在使用<code>module</code>. 在这里我们讨论<code>module</code></p>
 <p><code>module</code>字段会指向一个ES2015 模块的入口, 当使用<code>rollup</code>这些模块的bundler时，由于使用了ES2015 的模块，可以再做<code>tree shaking</code>优化</p>
