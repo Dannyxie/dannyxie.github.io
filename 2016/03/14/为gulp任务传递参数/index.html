@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://derycktse.github.io">
-  <title>webpack使用require.ensure进行代码分割 | Deryck</title>
+  <title>为gulp任务传递参数 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="代码分割实例来自于webpack假定我们有下面的项目结构12345678.├── dist├── js│   ├── a.js│   ├── b.js│   ├── c.js│   └── entry.js└── webpack.config.js">
+  <meta name="description" content="现在web前端的脚手架中，有相当一部分数量的人选择用gulp做为首选的构建工具，但是，我们是没办法向gulp的任务直接传递命令行参数的。我们知道gulp实际上是运行在nodejs中的，那么，我们是可以访问process.argv比如命令gulp task1 --a 123 --b &amp;quot;my string&amp;quot; --c, 我们看看process.argv会输出什么12345678910">
 <meta name="keywords" content="构建">
 <meta property="og:type" content="article">
-<meta property="og:title" content="webpack使用require.ensure进行代码分割">
-<meta property="og:url" content="https://derycktse.github.io/2016/03/16/webpack使用require-ensure进行代码分割/index.html">
+<meta property="og:title" content="为gulp任务传递参数">
+<meta property="og:url" content="https://derycktse.github.io/2016/03/14/为gulp任务传递参数/index.html">
 <meta property="og:site_name" content="Deryck">
-<meta property="og:description" content="代码分割实例来自于webpack假定我们有下面的项目结构12345678.├── dist├── js│   ├── a.js│   ├── b.js│   ├── c.js│   └── entry.js└── webpack.config.js">
-<meta property="og:image" content="https://segmentfault.com/img/bVJS9m?w=1352&h=528">
+<meta property="og:description" content="现在web前端的脚手架中，有相当一部分数量的人选择用gulp做为首选的构建工具，但是，我们是没办法向gulp的任务直接传递命令行参数的。我们知道gulp实际上是运行在nodejs中的，那么，我们是可以访问process.argv比如命令gulp task1 --a 123 --b &amp;quot;my string&amp;quot; --c, 我们看看process.argv会输出什么12345678910">
 <meta property="og:updated_time" content="2017-04-26T16:15:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="webpack使用require.ensure进行代码分割">
-<meta name="twitter:description" content="代码分割实例来自于webpack假定我们有下面的项目结构12345678.├── dist├── js│   ├── a.js│   ├── b.js│   ├── c.js│   └── entry.js└── webpack.config.js">
-<meta name="twitter:image" content="https://segmentfault.com/img/bVJS9m?w=1352&h=528">
+<meta name="twitter:title" content="为gulp任务传递参数">
+<meta name="twitter:description" content="现在web前端的脚手架中，有相当一部分数量的人选择用gulp做为首选的构建工具，但是，我们是没办法向gulp的任务直接传递命令行参数的。我们知道gulp实际上是运行在nodejs中的，那么，我们是可以访问process.argv比如命令gulp task1 --a 123 --b &amp;quot;my string&amp;quot; --c, 我们看看process.argv会输出什么12345678910">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -160,38 +158,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-webpack使用require-ensure进行代码分割" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-为gulp任务传递参数" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      webpack使用require.ensure进行代码分割
+      为gulp任务传递参数
     </h1>
   
 
         
-        <a href="/2016/03/16/webpack使用require-ensure进行代码分割/" class="archive-article-date">
-  	<time datetime="2016-03-15T20:52:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-16</time>
+        <a href="/2016/03/14/为gulp任务传递参数/" class="archive-article-date">
+  	<time datetime="2016-03-14T16:26:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="代码分割"><a href="#代码分割" class="headerlink" title="代码分割"></a>代码分割</h2><p>实例来自于<a href="https://webpack.js.org/guides/code-splitting-require/" target="_blank" rel="external">webpack</a><br>假定我们有下面的项目结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── dist</div><div class="line">├── js</div><div class="line">│   ├── a.js</div><div class="line">│   ├── b.js</div><div class="line">│   ├── c.js</div><div class="line">│   └── entry.js</div><div class="line">└── webpack.config.js</div></pre></td></tr></table></figure></p>
-<a id="more"></a>
-<p>文件内容<br>entry.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">require(&apos;./a&apos;);</div><div class="line">require.ensure([&apos;./b&apos;], function(require)&#123;</div><div class="line">    require(&apos;./c&apos;);</div><div class="line">    console.log(&apos;done!&apos;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>a.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(&apos;***** I AM a *****&apos;);</div></pre></td></tr></table></figure></p>
-<p>b.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(&apos;***** I AM b *****&apos;);</div></pre></td></tr></table></figure></p>
-<p>c.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(&apos;***** I AM c *****&apos;);</div></pre></td></tr></table></figure></p>
-<p>下面我们看一下<code>webpack.config.js</code>的配置<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports =  &#123;</div><div class="line">		entry : <span class="string">'./js/entry.js'</span></div><div class="line">		,</div><div class="line">		output : &#123;</div><div class="line">			filename : <span class="string">'bundle.js'</span></div><div class="line">			, <span class="attr">path</span> : path.resolve(__dirname, <span class="string">'dist'</span>)</div><div class="line">			, <span class="attr">publicPath</span>: <span class="string">'./dist/'</span> <span class="comment">//当使用代码分割时，publicPath很重要，它将告诉webpack从哪儿去加载其他打包的文件</span></div><div class="line">			, <span class="attr">pathinfo</span> : <span class="literal">true</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
-<p>执行webpack打包之后，我们可以看到结果<br><img src="https://segmentfault.com/img/bVJS9m?w=1352&amp;h=528" alt="执行webpack打包"></p>
-<p>我们发现，webpack打包生成了<code>bundle.js</code>以及<code>1.bundle.js</code>两个文件<br>查看文件的内容，我们可以发现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//bundle.js</span></div><div class="line"><span class="comment">/******/</span> (<span class="function"><span class="keyword">function</span>(<span class="params">modules</span>) </span>&#123; <span class="comment">// webpackBootstrap</span></div><div class="line"><span class="comment">/******/</span> 	<span class="comment">/*</span></div><div class="line"><span class="comment">				webpack 集成的代码，这里略</span></div><div class="line"><span class="comment">			*/</span></div><div class="line"><span class="comment">/******/</span> 	__webpack_require__.p = <span class="string">"./dist/"</span>; <span class="comment">//按需加载的路径</span></div><div class="line"></div><div class="line"><span class="comment">/******/</span> 	<span class="comment">// Load entry module and return exports</span></div><div class="line"><span class="comment">/******/</span> 	<span class="keyword">return</span> __webpack_require__(<span class="number">0</span>);</div><div class="line"><span class="comment">/******/</span> &#125;)</div><div class="line"><span class="comment">/************************************************************************/</span></div><div class="line"><span class="comment">/******/</span> ([</div><div class="line"><span class="comment">/* 0 */</span></div><div class="line"><span class="comment">/*!*********************!*\</span></div><div class="line"><span class="comment">  !*** ./js/entry.js ***!</span></div><div class="line"><span class="comment">  \*********************/</span></div><div class="line"><span class="comment">/***/</span> <span class="function"><span class="keyword">function</span>(<span class="params">module, exports, __webpack_require__</span>) </span>&#123;</div><div class="line"></div><div class="line">	__webpack_require__(<span class="comment">/*! ./a */</span> <span class="number">1</span>)</div><div class="line"></div><div class="line">	__webpack_require__.e<span class="comment">/* nsure */</span>(<span class="number">1</span>, <span class="function"><span class="keyword">function</span> (<span class="params">require</span>) </span>&#123;</div><div class="line">		__webpack_require__(<span class="comment">/*! ./c */</span> <span class="number">3</span>)</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'done!'</span>)</div><div class="line">	&#125;)</div><div class="line"></div><div class="line"><span class="comment">/***/</span> &#125;,</div><div class="line"><span class="comment">/* 1 */</span></div><div class="line"><span class="comment">/*!*****************!*\</span></div><div class="line"><span class="comment">  !*** ./js/a.js ***!</span></div><div class="line"><span class="comment">  \*****************/</span></div><div class="line"><span class="comment">/***/</span> <span class="function"><span class="keyword">function</span>(<span class="params">module, exports</span>) </span>&#123;</div><div class="line"></div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'I am a'</span>)</div><div class="line"></div><div class="line"><span class="comment">/***/</span> &#125;</div><div class="line"><span class="comment">/******/</span> ]);</div></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.bundle.js</span></div><div class="line">webpackJsonp([<span class="number">1</span>],[</div><div class="line"><span class="comment">/* 0 */</span>,</div><div class="line"><span class="comment">/* 1 */</span>,</div><div class="line"><span class="comment">/* 2 */</span></div><div class="line"><span class="comment">/*!*****************!*\</span></div><div class="line"><span class="comment">  !*** ./js/b.js ***!</span></div><div class="line"><span class="comment">  \*****************/</span></div><div class="line"><span class="comment">/***/</span> <span class="function"><span class="keyword">function</span>(<span class="params">module, exports</span>) </span>&#123;</div><div class="line">	</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'I am b'</span>)</div><div class="line"><span class="comment">/***/</span> &#125;,</div><div class="line"><span class="comment">/* 3 */</span></div><div class="line"><span class="comment">/*!*****************!*\</span></div><div class="line"><span class="comment">  !*** ./js/c.js ***!</span></div><div class="line"><span class="comment">  \*****************/</span></div><div class="line"><span class="comment">/***/</span> <span class="function"><span class="keyword">function</span>(<span class="params">module, exports</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'I am c'</span>)</div><div class="line"><span class="comment">/***/</span> &#125;</div><div class="line">]);</div></pre></td></tr></table></figure>
-<p><code>a.js</code>的内容被打包到bundle.js之中,而<code>b.js</code>,<code>c.js</code>则位于<code>1.bundle.js</code>中,<code>b.js</code>,<code>c.js</code>从主入口文件中分离了出来，而且只有<code>c.js</code>的内容被执行了</p>
+        <p>现在web前端的脚手架中，有相当一部分数量的人选择用gulp做为首选的构建工具，但是，我们是没办法向gulp的任务直接传递命令行参数的。<br>我们知道gulp实际上是运行在nodejs中的，那么，我们是可以访问<code>process.argv</code><br>比如命令<code>gulp task1 --a 123 --b &quot;my string&quot; --c</code>, 我们看看<code>process.argv</code>会输出什么<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line"><span class="string">'/usr/bin/nodejs'</span>,</div><div class="line"><span class="string">'/home/user/.node_modules_global/bin/gulp'</span>,</div><div class="line"><span class="string">'task1'</span>,</div><div class="line"><span class="string">'--a'</span>,</div><div class="line"><span class="string">'123'</span>,</div><div class="line"><span class="string">'--b'</span>,</div><div class="line"><span class="string">'my string'</span>,</div><div class="line"><span class="string">'--c'</span></div><div class="line">]</div></pre></td></tr></table></figure></p>
+<a id="more"></a> 
+<p>既然可以拿到命令行输入的东西，那么我们就可以自己写一个参数解析的函数啦!<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// fetch command line arguments</span></div><div class="line"><span class="keyword">const</span> arg = (<span class="function"><span class="params">argList</span> =&gt;</span> &#123;</div><div class="line"></div><div class="line">  <span class="keyword">let</span> arg = &#123;&#125;, a, opt, thisOpt, curOpt;</div><div class="line">  <span class="keyword">for</span> (a = <span class="number">0</span>; a &lt; argList.length; a++) &#123;</div><div class="line"></div><div class="line">    thisOpt = argList[a].trim();</div><div class="line">    opt = thisOpt.replace(<span class="regexp">/^\-+/</span>, <span class="string">''</span>);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (opt === thisOpt) &#123;</div><div class="line"></div><div class="line">      <span class="comment">// argument value</span></div><div class="line">      <span class="keyword">if</span> (curOpt) arg[curOpt] = opt;</div><div class="line">      curOpt = <span class="literal">null</span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">      <span class="comment">// argument name</span></div><div class="line">      curOpt = opt;</div><div class="line">      arg[curOpt] = <span class="literal">true</span>;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> arg;</div><div class="line"></div><div class="line">&#125;)(process.argv);</div><div class="line"><span class="built_in">console</span>.log(arg) <span class="comment">//&#123; a: '123', b: 'my string', c: true &#125;</span></div></pre></td></tr></table></figure></p>
+<p>搞定！</p>
+<p>当然，这只是一个简单的实现。<br>我们还可以使用功能更强大的库, 比如TJ大神的<a href="https://github.com/tj/commander" target="_blank" rel="external">commander</a></p>
+<p>参考<br><a href="https://www.sitepoint.com/pass-parameters-gulp-tasks/" target="_blank" rel="external">How to Pass Command Line Parameters to Gulp Tasks</a></p>
 
       
 
@@ -282,7 +274,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2016/03/16/webpack使用require-ensure进行代码分割/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2016/03/14/为gulp任务传递参数/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -296,18 +288,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/04/05/vue源码/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/03/15/webpack使用require-ensure进行代码分割/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          vue源码学习笔记
+          webpack使用require.ensure进行代码分割
         
       </div>
     </a>
   
   
-    <a href="/2016/03/15/为gulp任务传递参数/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">为gulp任务传递参数</div>
+    <a href="/2016/03/10/webpack入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">webpack入门</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -321,7 +313,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="webpack使用require-ensure进行代码分割" data-title="webpack使用require.ensure进行代码分割" data-url="https://derycktse.github.io/2016/03/16/webpack使用require-ensure进行代码分割/"></div>
+	<div class="ds-thread" data-thread-key="为gulp任务传递参数" data-title="为gulp任务传递参数" data-url="https://derycktse.github.io/2016/03/14/为gulp任务传递参数/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -429,6 +421,10 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">react</a>
               </li>
              
@@ -438,10 +434,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">npm</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
