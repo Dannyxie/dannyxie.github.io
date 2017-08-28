@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://derycktse.github.io/"/>
-  <updated>2017-08-17T06:47:09.000Z</updated>
+  <updated>2017-08-15T15:19:59.000Z</updated>
   <id>https://derycktse.github.io/</id>
   
   <author>
@@ -14,77 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>react组件的生命周期</title>
-    <link href="https://derycktse.github.io/2017/08/15/react-component-lifecycle/"/>
-    <id>https://derycktse.github.io/2017/08/15/react-component-lifecycle/</id>
-    <published>2017-08-15T12:18:41.000Z</published>
-    <updated>2017-08-17T06:47:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>react组件生命周期:</p>
-<ul>
-<li>constructor</li>
-<li>componentWillMount</li>
-<li>render</li>
-<li>ComponentDidMount</li>
-<li>componentWillReceiveProps</li>
-<li>shouldConponentUpdate</li>
-<li>componentWillUpdate</li>
-<li>componentDidUpdate</li>
-<li>componentWillUnmount</li>
-</ul>
-<a id="more"></a>
-<p>普通的react组件，一般会依次经历一下阶段:</p>
-<ol>
-<li>constructor</li>
-<li>componentWillMount</li>
-<li>render</li>
-<li>ComponentDidMount</li>
-</ol>
-<p>当react组件内部state有更新时:</p>
-<ol>
-<li>shouldConponentUpdate (当shouldConponentUpdate返回值为false的时候，之后的生命周期不会执行)</li>
-<li>componentWillUpdate</li>
-<li>render</li>
-<li>componentDidUpdate</li>
-</ol>
-<p>当react组件接收的props值有更新时:</p>
-<ol>
-<li>componentWillReceiveProps</li>
-<li>shouldConponentUpdate (当shouldConponentUpdate返回值为false的时候，之后的生命周期不会执行)</li>
-<li>componentWillUpdate</li>
-<li>render</li>
-<li>componentDidUpdate</li>
-</ol>
-<p>删除react组件:</p>
-<ol>
-<li>componentWillUnmount</li>
-</ol>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">React.Component</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;react组件生命周期:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;constructor&lt;/li&gt;
-&lt;li&gt;componentWillMount&lt;/li&gt;
-&lt;li&gt;render&lt;/li&gt;
-&lt;li&gt;ComponentDidMount&lt;/li&gt;
-&lt;li&gt;componentWillReceiveProps&lt;/li&gt;
-&lt;li&gt;shouldConponentUpdate&lt;/li&gt;
-&lt;li&gt;componentWillUpdate&lt;/li&gt;
-&lt;li&gt;componentDidUpdate&lt;/li&gt;
-&lt;li&gt;componentWillUnmount&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-    
-      <category term="react" scheme="https://derycktse.github.io/tags/react/"/>
-    
-  </entry>
   
   <entry>
     <title>electron使用sqlite</title>
@@ -195,10 +124,10 @@
   
   <entry>
     <title>使用rollup</title>
-    <link href="https://derycktse.github.io/2017/04/30/%E4%BD%BF%E7%94%A8rollup/"/>
-    <id>https://derycktse.github.io/2017/04/30/使用rollup/</id>
+    <link href="https://derycktse.github.io/2017/05/01/rollup/"/>
+    <id>https://derycktse.github.io/2017/05/01/rollup/</id>
     <published>2017-04-30T17:32:32.000Z</published>
-    <updated>2017-04-30T17:36:59.000Z</updated>
+    <updated>2017-08-21T03:23:42.000Z</updated>
     
     <content type="html"><![CDATA[<p>Rollup被誉为下一代ES</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --global rollup</div></pre></td></tr></table></figure>
@@ -221,10 +150,10 @@
   
   <entry>
     <title>使用Vue全家桶开发知乎日报</title>
-    <link href="https://derycktse.github.io/2017/04/27/%E4%BD%BF%E7%94%A8Vue%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%BC%80%E5%8F%91%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5/"/>
-    <id>https://derycktse.github.io/2017/04/27/使用Vue全家桶开发知乎日报/</id>
+    <link href="https://derycktse.github.io/2017/04/27/vue-zhihu/"/>
+    <id>https://derycktse.github.io/2017/04/27/vue-zhihu/</id>
     <published>2017-04-27T07:41:33.000Z</published>
-    <updated>2017-05-05T08:47:44.000Z</updated>
+    <updated>2017-08-25T12:55:13.000Z</updated>
     
     <content type="html"><![CDATA[<p>使用Vue2 + vue-router + vuex 开发的知乎日报</p>
 <p><a href="https://github.com/derycktse/zhihudaily-vue" target="_blank" rel="external">github地址</a>，如果觉得还可以，不妨给个star吧</p>
@@ -253,8 +182,8 @@
   
   <entry>
     <title>实现拖拽</title>
-    <link href="https://derycktse.github.io/2017/04/26/%E5%AE%9E%E7%8E%B0%E6%8B%96%E6%8B%BD/"/>
-    <id>https://derycktse.github.io/2017/04/26/实现拖拽/</id>
+    <link href="https://derycktse.github.io/2017/04/27/%E5%AE%9E%E7%8E%B0%E6%8B%96%E6%8B%BD/"/>
+    <id>https://derycktse.github.io/2017/04/27/实现拖拽/</id>
     <published>2017-04-26T16:17:10.000Z</published>
     <updated>2017-05-16T08:11:40.000Z</updated>
     
@@ -283,7 +212,7 @@
     <title>treer:命令行生成目录结构的实用小工具</title>
     <link href="https://derycktse.github.io/2017/04/23/treer/"/>
     <id>https://derycktse.github.io/2017/04/23/treer/</id>
-    <published>2017-04-23T11:12:58.000Z</published>
+    <published>2017-04-23T03:12:58.000Z</published>
     <updated>2017-08-19T15:06:05.000Z</updated>
     
     <content type="html"><![CDATA[<p>有时候在写说明文档的时，需要列出文件的一个目录结构,几次手动拼接之后，写了一个cli小工具来自动生成。</p>
@@ -314,11 +243,82 @@
   </entry>
   
   <entry>
+    <title>react组件的生命周期</title>
+    <link href="https://derycktse.github.io/2016/12/15/react-component-lifecycle/"/>
+    <id>https://derycktse.github.io/2016/12/15/react-component-lifecycle/</id>
+    <published>2016-12-15T12:18:41.000Z</published>
+    <updated>2017-08-28T11:26:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>react组件生命周期:</p>
+<ul>
+<li>constructor</li>
+<li>componentWillMount</li>
+<li>render</li>
+<li>ComponentDidMount</li>
+<li>componentWillReceiveProps</li>
+<li>shouldConponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>componentDidUpdate</li>
+<li>componentWillUnmount</li>
+</ul>
+<a id="more"></a>
+<p>普通的react组件，一般会依次经历一下阶段:</p>
+<ol>
+<li>constructor</li>
+<li>componentWillMount</li>
+<li>render</li>
+<li>ComponentDidMount</li>
+</ol>
+<p>当react组件内部state有更新时:</p>
+<ol>
+<li>shouldConponentUpdate (当shouldConponentUpdate返回值为false的时候，之后的生命周期不会执行)</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ol>
+<p>当react组件接收的props值有更新时:</p>
+<ol>
+<li>componentWillReceiveProps</li>
+<li>shouldConponentUpdate (当shouldConponentUpdate返回值为false的时候，之后的生命周期不会执行)</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ol>
+<p>删除react组件:</p>
+<ol>
+<li>componentWillUnmount</li>
+</ol>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://facebook.github.io/react/docs/react-component.html" target="_blank" rel="external">React.Component</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;react组件生命周期:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;constructor&lt;/li&gt;
+&lt;li&gt;componentWillMount&lt;/li&gt;
+&lt;li&gt;render&lt;/li&gt;
+&lt;li&gt;ComponentDidMount&lt;/li&gt;
+&lt;li&gt;componentWillReceiveProps&lt;/li&gt;
+&lt;li&gt;shouldConponentUpdate&lt;/li&gt;
+&lt;li&gt;componentWillUpdate&lt;/li&gt;
+&lt;li&gt;componentDidUpdate&lt;/li&gt;
+&lt;li&gt;componentWillUnmount&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="react" scheme="https://derycktse.github.io/tags/react/"/>
+    
+  </entry>
+  
+  <entry>
     <title>javascript深浅拷贝</title>
-    <link href="https://derycktse.github.io/2016/05/05/javascript%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/"/>
-    <id>https://derycktse.github.io/2016/05/05/javascript深浅拷贝/</id>
+    <link href="https://derycktse.github.io/2016/05/05/javascript-copy/"/>
+    <id>https://derycktse.github.io/2016/05/05/javascript-copy/</id>
     <published>2016-05-05T11:47:09.000Z</published>
-    <updated>2017-05-15T14:39:02.000Z</updated>
+    <updated>2017-08-22T15:31:01.000Z</updated>
     
     <content type="html"><![CDATA[<p>javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量</p>
 <p>例如下面例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> object = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125; ;  </div><div class="line"><span class="keyword">var</span> copy = object ;  </div><div class="line">object.a = <span class="number">3</span> ;  </div><div class="line"><span class="built_in">console</span>.log( copy.a ) ;</div></pre></td></tr></table></figure></p>
@@ -372,10 +372,10 @@
   
   <entry>
     <title>三个关于数组的小技巧</title>
-    <link href="https://derycktse.github.io/2016/04/14/%E4%B8%89%E4%B8%AA%E5%85%B3%E4%BA%8E%E6%95%B0%E7%BB%84%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-    <id>https://derycktse.github.io/2016/04/14/三个关于数组的小技巧/</id>
+    <link href="https://derycktse.github.io/2016/04/14/three-array-tips/"/>
+    <id>https://derycktse.github.io/2016/04/14/three-array-tips/</id>
     <published>2016-04-14T02:36:07.000Z</published>
-    <updated>2017-04-26T16:15:05.000Z</updated>
+    <updated>2017-08-24T15:44:47.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="1-可迭代的空数组"><a href="#1-可迭代的空数组" class="headerlink" title="1.可迭代的空数组"></a>1.可迭代的空数组</h3><p>我们知道，Javacript的所创建的数组如果未被初始化值的话，它是一个稀疏数组(sparse array)，这是什么意思的？我们先看下面的代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">4</span>); <span class="comment">//[undefined, undefined, undefined, undefined]</span></div></pre></td></tr></table></figure></p>
 <p>假设我们要去迭代一个数组，我们会发现，未被初始化值的数组，index实际上访问不到的：</p>
@@ -409,10 +409,10 @@
   
   <entry>
     <title>vue源码学习笔记</title>
-    <link href="https://derycktse.github.io/2016/04/05/vue%E6%BA%90%E7%A0%81/"/>
-    <id>https://derycktse.github.io/2016/04/05/vue源码/</id>
+    <link href="https://derycktse.github.io/2016/04/05/vue-source-code/"/>
+    <id>https://derycktse.github.io/2016/04/05/vue-source-code/</id>
     <published>2016-04-05T06:48:30.000Z</published>
-    <updated>2017-04-26T16:15:05.000Z</updated>
+    <updated>2017-08-23T14:51:01.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="83fac017f96f34c92c3578796a7ddb443d4e1f17"><a href="#83fac017f96f34c92c3578796a7ddb443d4e1f17" class="headerlink" title="[83fac017f96f34c92c3578796a7ddb443d4e1f17]"></a>[83fac017f96f34c92c3578796a7ddb443d4e1f17]</h3><p>使用grunt作为构建工具<br>npm + component作为包的管理</p>
 <h3 id="871ed9126639c9128c18bb2f19e6afd42c0c5ad9"><a href="#871ed9126639c9128c18bb2f19e6afd42c0c5ad9" class="headerlink" title="[871ed9126639c9128c18bb2f19e6afd42c0c5ad9]"></a>[871ed9126639c9128c18bb2f19e6afd42c0c5ad9]</h3><p>新增加了一个数据绑定的实例<br>大致思路：</p>
@@ -437,10 +437,10 @@
   
   <entry>
     <title>webpack使用require.ensure进行代码分割</title>
-    <link href="https://derycktse.github.io/2016/03/15/webpack%E4%BD%BF%E7%94%A8require-ensure%E8%BF%9B%E8%A1%8C%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2/"/>
-    <id>https://derycktse.github.io/2016/03/15/webpack使用require-ensure进行代码分割/</id>
+    <link href="https://derycktse.github.io/2016/03/16/webpack-code-splitting/"/>
+    <id>https://derycktse.github.io/2016/03/16/webpack-code-splitting/</id>
     <published>2016-03-15T20:52:13.000Z</published>
-    <updated>2017-04-26T16:15:05.000Z</updated>
+    <updated>2017-08-26T15:36:44.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="代码分割"><a href="#代码分割" class="headerlink" title="代码分割"></a>代码分割</h2><p>实例来自于<a href="https://webpack.js.org/guides/code-splitting-require/" target="_blank" rel="external">webpack</a><br>假定我们有下面的项目结构<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── dist</div><div class="line">├── js</div><div class="line">│   ├── a.js</div><div class="line">│   ├── b.js</div><div class="line">│   ├── c.js</div><div class="line">│   └── entry.js</div><div class="line">└── webpack.config.js</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -469,10 +469,10 @@
   
   <entry>
     <title>为gulp任务传递参数</title>
-    <link href="https://derycktse.github.io/2016/03/14/%E4%B8%BAgulp%E4%BB%BB%E5%8A%A1%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0/"/>
-    <id>https://derycktse.github.io/2016/03/14/为gulp任务传递参数/</id>
+    <link href="https://derycktse.github.io/2016/03/15/gulp-how-to-pass-parameter/"/>
+    <id>https://derycktse.github.io/2016/03/15/gulp-how-to-pass-parameter/</id>
     <published>2016-03-14T16:26:36.000Z</published>
-    <updated>2017-04-26T16:15:05.000Z</updated>
+    <updated>2017-08-27T14:53:00.000Z</updated>
     
     <content type="html"><![CDATA[<p>现在web前端的脚手架中，有相当一部分数量的人选择用gulp做为首选的构建工具，但是，我们是没办法向gulp的任务直接传递命令行参数的。<br>我们知道gulp实际上是运行在nodejs中的，那么，我们是可以访问<code>process.argv</code><br>比如命令<code>gulp task1 --a 123 --b &quot;my string&quot; --c</code>, 我们看看<code>process.argv</code>会输出什么<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line"><span class="string">'/usr/bin/nodejs'</span>,</div><div class="line"><span class="string">'/home/user/.node_modules_global/bin/gulp'</span>,</div><div class="line"><span class="string">'task1'</span>,</div><div class="line"><span class="string">'--a'</span>,</div><div class="line"><span class="string">'123'</span>,</div><div class="line"><span class="string">'--b'</span>,</div><div class="line"><span class="string">'my string'</span>,</div><div class="line"><span class="string">'--c'</span></div><div class="line">]</div></pre></td></tr></table></figure></p>
 <a id="more"></a> 
@@ -588,8 +588,8 @@
   
   <entry>
     <title>ES2015读书笔记</title>
-    <link href="https://derycktse.github.io/2016/02/22/ES2015%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>https://derycktse.github.io/2016/02/22/ES2015读书笔记/</id>
+    <link href="https://derycktse.github.io/2016/02/23/ES2015%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>https://derycktse.github.io/2016/02/23/ES2015读书笔记/</id>
     <published>2016-02-22T17:12:12.000Z</published>
     <updated>2017-04-26T16:15:05.000Z</updated>
     

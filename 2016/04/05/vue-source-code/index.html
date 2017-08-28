@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://derycktse.github.io">
-  <title>Deryck</title>
+  <title>vue源码学习笔记 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Deryck">
-<meta property="og:url" content="https://derycktse.github.io/index.html">
+  <meta name="description" content="[83fac017f96f34c92c3578796a7ddb443d4e1f17]使用grunt作为构建工具npm + component作为包的管理 [871ed9126639c9128c18bb2f19e6afd42c0c5ad9]新增加了一个数据绑定的实例大致思路：  html结构中新增占位符号 将有占位符号的DOM保存起来，同时拥有一个对象将DOM关联起来 使用Object.define">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue源码学习笔记">
+<meta property="og:url" content="https://derycktse.github.io/2016/04/05/vue-source-code/index.html">
 <meta property="og:site_name" content="Deryck">
+<meta property="og:description" content="[83fac017f96f34c92c3578796a7ddb443d4e1f17]使用grunt作为构建工具npm + component作为包的管理 [871ed9126639c9128c18bb2f19e6afd42c0c5ad9]新增加了一个数据绑定的实例大致思路：  html结构中新增占位符号 将有占位符号的DOM保存起来，同时拥有一个对象将DOM关联起来 使用Object.define">
+<meta property="og:updated_time" content="2017-08-23T14:51:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Deryck">
+<meta name="twitter:title" content="vue源码学习笔记">
+<meta name="twitter:description" content="[83fac017f96f34c92c3578796a7ddb443d4e1f17]使用grunt作为构建工具npm + component作为包的管理 [871ed9126639c9128c18bb2f19e6afd42c0c5ad9]新增加了一个数据绑定的实例大致思路：  html结构中新增占位符号 将有占位符号的DOM保存起来，同时拥有一个对象将DOM关联起来 使用Object.define">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -153,619 +157,145 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-use-sqlite-in-electron" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-vue-source-code" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/13/use-sqlite-in-electron/">electron使用sqlite</a>
+    <h1 class="article-title" itemprop="name">
+      vue源码学习笔记
     </h1>
   
 
         
-        <a href="/2017/08/13/use-sqlite-in-electron/" class="archive-article-date">
-  	<time datetime="2017-08-13T13:06:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-13</time>
+        <a href="/2016/04/05/vue-source-code/" class="archive-article-date">
+  	<time datetime="2016-04-05T06:48:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在electron使用sqlite3的时候，会出现错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Uncaught Error: Cannot find module ‘/…/node_modules/sqlite3/lib/binding/node-v51-darwin-x64/node_sqlite3.node’</div></pre></td></tr></table></figure>
-<p>可以使用electron-rebuild解决:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install --save-dev electron-rebuild</div><div class="line">$ npm install --save sqlite3</div></pre></td></tr></table></figure></p>
-<p>在<code>package.json</code>加上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;rebuild&quot;: &quot;electron-rebuild -f -w sqlite3&quot;</div></pre></td></tr></table></figure></p>
-<p>执行:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm run rebuild</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/08/13/use-sqlite-in-electron/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-package-json-main-jsnext-main-module" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/30/package-json-main-jsnext-main-module/">package.json中的main,jsnext:main,module分别是干什么用的</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/30/package-json-main-jsnext-main-module/" class="archive-article-date">
-  	<time datetime="2017-06-30T03:16:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>我们来看<a href="https://docs.npmjs.com/files/package.json#main" target="_blank" rel="external">npm</a>官方的定义:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">The main field is a module ID that is the primary entry point to your program. That is, if your package is named foo, and a user installs it, and then does require(&quot;foo&quot;), then your main module&apos;s exports object will be returned.</div><div class="line"></div><div class="line">This should be a module ID relative to the root of your package folder.</div><div class="line"></div><div class="line">For most modules, it makes the most sense to have a main script and often not much else.</div></pre></td></tr></table></figure></p>
-<p>简单说<code>main</code>字段定义了我们程序的主要入口，用户在<code>require</code>我们模块的时候，程序会从<code>main</code>字段中找到我们程序的主要入口，从而输出我们的代码依赖.</p>
-<p>在这里,<code>main</code>字段用来指向commonjs的模块</p>
-<h2 id="jsnext-main-与-module"><a href="#jsnext-main-与-module" class="headerlink" title="jsnext:main 与 module"></a>jsnext:main 与 module</h2><p><code>jsnext:main</code> 与 <code>module</code>的作用是一样的， 但是由于<code>module</code>更直白一点，所以现在使用<code>module</code>. 在这里我们讨论<code>module</code></p>
-<p><code>module</code>字段会指向一个ES2015 模块的入口, 当使用<code>rollup</code>这些模块的bundler时，由于使用了ES2015 的模块，可以再做<code>tree shaking</code>优化</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://shuheikagawa.com/blog/2017/01/05/main-jsnext-main-and-module/" target="_blank" rel="external">http://shuheikagawa.com/blog/2017/01/05/main-jsnext-main-and-module/</a><br><a href="https://github.com/jsforum/jsforum/issues/5" target="_blank" rel="external">https://github.com/jsforum/jsforum/issues/5</a><br><a href="https://www.reddit.com/r/javascript/comments/5jwg9c/confused_about_fields_module_and_jsnextmain_in/" target="_blank" rel="external">https://www.reddit.com/r/javascript/comments/5jwg9c/confused_about_fields_module_and_jsnextmain_in/</a><br>rollup wiki</p>
-<p><a href="https://github.com/rollup/rollup/wiki/pkg.module" target="_blank" rel="external">https://github.com/rollup/rollup/wiki/pkg.module</a><br><a href="https://github.com/rollup/rollup/wiki/jsnext:main" target="_blank" rel="external">https://github.com/rollup/rollup/wiki/jsnext:main</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/30/package-json-main-jsnext-main-module/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-webpack-uglify-for-ie8" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/18/webpack-uglify-for-ie8/">在webpack中使UglifyPlugin支持IE8</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/18/webpack-uglify-for-ie8/" class="archive-article-date">
-  	<time datetime="2017-05-18T15:27:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Uglify默认把screw_ie8默认为true，将screw_ie8配置为false:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">new webpack.optimize.UglifyJsPlugin(&#123;</div><div class="line">compress: &#123;</div><div class="line">        warnings: false,</div><div class="line">        screw_ie8 : false</div><div class="line">    &#125;,</div><div class="line">    mangle: &#123;</div><div class="line">        screw_ie8: false</div><div class="line">    &#125;,</div><div class="line">    output: &#123; screw_ie8: false &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/18/webpack-uglify-for-ie8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-关于点击鼠标右键在firefox上面的坑" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/10/关于点击鼠标右键在firefox上面的坑/">关于点击鼠标右键在firefox上面的坑</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/10/关于点击鼠标右键在firefox上面的坑/" class="archive-article-date">
-  	<time datetime="2017-05-10T07:44:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>昨天遇到一个这样的需求:</p>
-<p><strong>在浏览器内点击鼠标右键弹出菜单选项</strong></p>
-        
-          <a class="article-more-a" href="/2017/05/10/关于点击鼠标右键在firefox上面的坑/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/10/关于点击鼠标右键在firefox上面的坑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-rollup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/01/rollup/">使用rollup</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/01/rollup/" class="archive-article-date">
-  	<time datetime="2017-04-30T17:32:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Rollup被誉为下一代ES</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --global rollup</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/05/01/rollup/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">构建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/01/rollup/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-vue-zhihu" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/27/vue-zhihu/">使用Vue全家桶开发知乎日报</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/27/vue-zhihu/" class="archive-article-date">
-  	<time datetime="2017-04-27T07:41:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>使用Vue2 + vue-router + vuex 开发的知乎日报</p>
-<p><a href="https://github.com/derycktse/zhihudaily-vue" target="_blank" rel="external">github地址</a>，如果觉得还可以，不妨给个star吧</p>
-<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为经常看知乎日报，萌生了自己撸一个的想法，于是有了这个项目，不过github上面也有很多人做出来了</p>
-        
-          <a class="article-more-a" href="/2017/04/27/vue-zhihu/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/27/vue-zhihu/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-实现拖拽" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/27/实现拖拽/">实现拖拽</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/27/实现拖拽/" class="archive-article-date">
-  	<time datetime="2017-04-26T16:17:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天在写一个拖拽效果，其实实现原理比较简单</p>
-<p>通过<code>mousedown</code>, <code>mousemove</code>, <code>mouseup</code>加信号量，获取在移动中鼠标的位置clientX, clientY，从而修改元素的相对位置即可。</p>
-        
-          <a class="article-more-a" href="/2017/04/27/实现拖拽/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/27/实现拖拽/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-treer" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/23/treer/">treer:命令行生成目录结构的实用小工具</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/23/treer/" class="archive-article-date">
-  	<time datetime="2017-04-23T03:12:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>有时候在写说明文档的时，需要列出文件的一个目录结构,几次手动拼接之后，写了一个cli小工具来自动生成。</p>
-<h3 id="安装方法："><a href="#安装方法：" class="headerlink" title="安装方法："></a>安装方法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install treer -g</div></pre></td></tr></table></figure>
-<p>如此我们便可以快速的生成目录结构啦！</p>
-<h3 id="生成结果"><a href="#生成结果" class="headerlink" title="生成结果"></a>生成结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$ treer</div><div class="line"></div><div class="line">Desktop</div><div class="line">├─.DS_Store</div><div class="line">├─.localized</div><div class="line">├─dir2</div><div class="line">|  ├─file3</div><div class="line">|  └file4</div><div class="line">├─dir1</div><div class="line">|  ├─dile2</div><div class="line">|  └file1</div></pre></td></tr></table></figure>
-<h4 id="指定目录"><a href="#指定目录" class="headerlink" title="指定目录"></a>指定目录</h4><p>默认的目录为当前的路径，可以通过<code>-d</code> 传入指定的路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ treer -d &lt;指定路径&gt;</div></pre></td></tr></table></figure>
-<h4 id="导出结果"><a href="#导出结果" class="headerlink" title="导出结果"></a>导出结果</h4><p>可将结果导出到文件中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ treer -e &lt;导出路径&gt;</div></pre></td></tr></table></figure>
-<h4 id="忽略指定的目录"><a href="#忽略指定的目录" class="headerlink" title="忽略指定的目录"></a>忽略指定的目录</h4><p>有时候我们需要忽略一些文件名，比如我们的<code>node_modules</code>文件夹</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ treer -i &lt;&quot;文件名，支持正则表达式/regex/哦&quot;&gt;</div></pre></td></tr></table></figure>
-<p>如果觉得实用，不妨<a href="https://github.com/derycktse/treer" target="_blank" rel="external">Star</a>一下吧，<a href="https://github.com/derycktse/treer" target="_blank" rel="external">github地址</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">npm</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/23/treer/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-react-component-lifecycle" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/15/react-component-lifecycle/">react组件的生命周期</a>
-    </h1>
-  
-
-        
-        <a href="/2016/12/15/react-component-lifecycle/" class="archive-article-date">
-  	<time datetime="2016-12-15T12:18:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>react组件生命周期:</p>
+        <h3 id="83fac017f96f34c92c3578796a7ddb443d4e1f17"><a href="#83fac017f96f34c92c3578796a7ddb443d4e1f17" class="headerlink" title="[83fac017f96f34c92c3578796a7ddb443d4e1f17]"></a>[83fac017f96f34c92c3578796a7ddb443d4e1f17]</h3><p>使用grunt作为构建工具<br>npm + component作为包的管理</p>
+<h3 id="871ed9126639c9128c18bb2f19e6afd42c0c5ad9"><a href="#871ed9126639c9128c18bb2f19e6afd42c0c5ad9" class="headerlink" title="[871ed9126639c9128c18bb2f19e6afd42c0c5ad9]"></a>[871ed9126639c9128c18bb2f19e6afd42c0c5ad9]</h3><p>新增加了一个数据绑定的实例<br>大致思路：</p>
 <ul>
-<li>constructor</li>
-<li>componentWillMount</li>
-<li>render</li>
-<li>ComponentDidMount</li>
-<li>componentWillReceiveProps</li>
-<li>shouldConponentUpdate</li>
-<li>componentWillUpdate</li>
-<li>componentDidUpdate</li>
-<li>componentWillUnmount</li>
+<li>html结构中新增占位符号</li>
+<li>将有占位符号的DOM保存起来，同时拥有一个对象将DOM关联起来</li>
+<li>使用Object.defineProperty为这个对象的属性进行绑定访问器，如果修改了这个访问器的话，也将更改更新到DOM中 </li>
 </ul>
-        
-          <a class="article-more-a" href="/2016/12/15/react-component-lifecycle/#more">more >></a>
-        
+<p><a href="https://github.com/vuejs/vue/blob/871ed9126639c9128c18bb2f19e6afd42c0c5ad9/explorations%2Fgetset.html" target="_blank" rel="external">实例地址</a></p>
+<h3 id="a5e27b1174e9196dcc9dbb0becc487275ea2e84c"><a href="#a5e27b1174e9196dcc9dbb0becc487275ea2e84c" class="headerlink" title="[a5e27b1174e9196dcc9dbb0becc487275ea2e84c]"></a>[a5e27b1174e9196dcc9dbb0becc487275ea2e84c]</h3><p>作者同时使用了compoent的包管理工具<br>看提交时间必须使用component@0.16.3这个版本</p>
+<p>修改了main.js，主要思想即是通过解析拥有指定属性的DOM，然后将它们存入到对象之中，为这个对象绑定访问选择器（set,get）从而将更新修改到DOM中</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/15/react-component-lifecycle/">展开全文 >></a>
-        </p>
-      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
 
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2016/04/05/vue-source-code/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
-
-
-
-
-
-
   
-    <article id="post-javascript-copy" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
+<nav id="article-nav">
+  
+    <a href="/2016/04/14/three-array-tips/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/05/javascript-copy/">javascript深浅拷贝</a>
-    </h1>
-  
-
+          三个关于数组的小技巧
         
-        <a href="/2016/05/05/javascript-copy/" class="archive-article-date">
-  	<time datetime="2016-05-05T11:47:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-05</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>javascript中分为基本类型跟引用类型两种，对于引用类型来说，变量实际上储存的是指针，对于变量的赋值，实际上也是复制指针地址，赋值后，我们对于变量的修改，也同样会影响到原来的变量</p>
-<p>例如下面例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> object = &#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span> &#125; ;  </div><div class="line"><span class="keyword">var</span> copy = object ;  </div><div class="line">object.a = <span class="number">3</span> ;  </div><div class="line"><span class="built_in">console</span>.log( copy.a ) ;</div></pre></td></tr></table></figure></p>
-        
-          <a class="article-more-a" href="/2016/05/05/javascript-copy/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/05/05/javascript-copy/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/16/webpack-code-splitting/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">webpack使用require.ensure进行代码分割</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
@@ -773,11 +303,28 @@
 
 
   
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="vue-source-code" data-title="vue源码学习笔记" data-url="https://derycktse.github.io/2016/04/05/vue-source-code/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"deryck"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
+
+
 
 
           </div>
@@ -799,8 +346,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
