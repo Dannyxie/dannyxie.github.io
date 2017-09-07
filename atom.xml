@@ -85,10 +85,10 @@
   
   <entry>
     <title>关于点击鼠标右键在firefox上面的坑</title>
-    <link href="https://derycktse.github.io/2017/05/10/%E5%85%B3%E4%BA%8E%E7%82%B9%E5%87%BB%E9%BC%A0%E6%A0%87%E5%8F%B3%E9%94%AE%E5%9C%A8firefox%E4%B8%8A%E9%9D%A2%E7%9A%84%E5%9D%91/"/>
-    <id>https://derycktse.github.io/2017/05/10/关于点击鼠标右键在firefox上面的坑/</id>
+    <link href="https://derycktse.github.io/2017/05/10/mouse-contextmenu-bug-firefox/"/>
+    <id>https://derycktse.github.io/2017/05/10/mouse-contextmenu-bug-firefox/</id>
     <published>2017-05-10T07:44:59.000Z</published>
-    <updated>2017-05-10T08:00:43.000Z</updated>
+    <updated>2017-08-28T11:40:25.000Z</updated>
     
     <content type="html"><![CDATA[<p>昨天遇到一个这样的需求:</p>
 <p><strong>在浏览器内点击鼠标右键弹出菜单选项</strong></p>
@@ -588,10 +588,10 @@
   
   <entry>
     <title>ES2015读书笔记</title>
-    <link href="https://derycktse.github.io/2016/02/23/ES2015%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>https://derycktse.github.io/2016/02/23/ES2015读书笔记/</id>
+    <link href="https://derycktse.github.io/2016/02/23/ES2015/"/>
+    <id>https://derycktse.github.io/2016/02/23/ES2015/</id>
     <published>2016-02-22T17:12:12.000Z</published>
-    <updated>2017-04-26T16:15:05.000Z</updated>
+    <updated>2017-09-07T15:26:29.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="变量的解构赋值"><a href="#变量的解构赋值" class="headerlink" title="变量的解构赋值"></a>变量的解构赋值</h2><ul>
 <li>“模式匹配”： 只要等号两边的模式相同，左边的变量久会被赋予相应的值；如果解构不成功，变量的值就等于<code>undefined</code>。 </li>

@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://derycktse.github.io">
-  <title>Archives: 2017/5 | Deryck</title>
+  <title>关于点击鼠标右键在firefox上面的坑 | Deryck</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Deryck">
-<meta property="og:url" content="https://derycktse.github.io/archives/2017/05/index.html">
+  <meta name="description" content="昨天遇到一个这样的需求: 在浏览器内点击鼠标右键弹出菜单选项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于点击鼠标右键在firefox上面的坑">
+<meta property="og:url" content="https://derycktse.github.io/2017/05/10/mouse-contextmenu-bug-firefox/index.html">
 <meta property="og:site_name" content="Deryck">
+<meta property="og:description" content="昨天遇到一个这样的需求: 在浏览器内点击鼠标右键弹出菜单选项">
+<meta property="og:updated_time" content="2017-08-28T11:40:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Deryck">
+<meta name="twitter:title" content="关于点击鼠标右键在firefox上面的坑">
+<meta name="twitter:description" content="昨天遇到一个这样的需求: 在浏览器内点击鼠标右键弹出菜单选项">
   
     <link rel="alternative" href="/atom.xml" title="Deryck" type="application/atom+xml">
   
@@ -153,114 +157,184 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-mouse-contextmenu-bug-firefox" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/18/webpack-uglify-for-ie8/" class="archive-article-date">
-  	<time datetime="2017-05-18T15:27:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-18</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/18/webpack-uglify-for-ie8/">在webpack中使UglifyPlugin支持IE8</a>
+    <h1 class="article-title" itemprop="name">
+      关于点击鼠标右键在firefox上面的坑
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/10/mouse-contextmenu-bug-firefox/" class="archive-article-date">
+        
+        <a href="/2017/05/10/mouse-contextmenu-bug-firefox/" class="archive-article-date">
   	<time datetime="2017-05-10T07:44:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/10/mouse-contextmenu-bug-firefox/">关于点击鼠标右键在firefox上面的坑</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天遇到一个这样的需求:</p>
+<p><strong>在浏览器内点击鼠标右键弹出菜单选项</strong></p>
+<a id="more"></a>
+<p>OK,这样的需求很简单，马上有了思路:</p>
+<ol>
+<li>写出菜单，默认隐藏</li>
+<li>在document上监听<code>contextmenu</code>事件，触发时显示菜单, 并阻止浏览器默认行为(重要，否则会显示浏览器自带的邮件菜单)</li>
+<li>监听document的<code>click</code>事件，隐藏菜单</li>
+<li>菜单监听自身的<code>click</code>事件，触发菜单自身事件，并阻止冒泡(否则会促发第三步的事件)</li>
+</ol>
+<p>想法一有，马上啪啪啪写出效果来，自己过了浏览器兼容性，基本OK</p>
+<p>但是……</p>
+<p>当在firefox上时，却发现一个奇怪的现象，点击右键的时候，菜单闪一下又隐藏了，这就说明第二步跟第三步的事件按序触发了.</p>
+<p>说明火狐在右键的时候，click事件也会同时触发，搜索了资料之后，发现这是一个古老的<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=71705" target="_blank" rel="external">bug</a>，到现在都没修好</p>
+<p>思考了一下，想到两种方式解决这个问题:</p>
+<ul>
+<li><code>contextmenu</code>触发后，马上锁定一个信号量，并设置短时间后停止(setTimeout方式解锁)，<code>click</code>事件触发时，当检测到锁定，那就不触发隐藏，如此便能解决，但是有一个问题，这样就没办法再短时间内右键又左键，稍微有点缺陷</li>
+<li>第二种方法便是，当<code>contextmenu</code>触发后，记录坐标，<code>click</code>事件触发时，检测坐标，如果一样（可设置偏差），便不触发。</li>
+</ul>
+<p>最终把问题解决了</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://derycktse.github.io/2017/05/10/mouse-contextmenu-bug-firefox/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/01/rollup/" class="archive-article-date">
-  	<time datetime="2017-04-30T17:32:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-01</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/01/rollup/">使用rollup</a>
-    </h1>
+    <a href="/2017/05/18/webpack-uglify-for-ie8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          在webpack中使UglifyPlugin支持IE8
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/01/rollup/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用rollup</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="mouse-contextmenu-bug-firefox" data-title="关于点击鼠标右键在firefox上面的坑" data-url="https://derycktse.github.io/2017/05/10/mouse-contextmenu-bug-firefox/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"deryck"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">构建</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -283,8 +357,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
